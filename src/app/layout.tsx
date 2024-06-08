@@ -7,8 +7,8 @@ import { getServerSession } from "next-auth";
 
 
 export const metadata = {
-  title: "BeScoutr",
-  description: "Somos una plataforma de scouting",
+  title: "Scoutr",
+  description: "Somos una plataforma que impulsa a los scoutrs a alcanzar sus metas y sueños.",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
