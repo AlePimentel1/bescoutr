@@ -38,6 +38,7 @@ declare module "next-auth" {
  * @see https://next-auth.js.org/configuration/options
  */
 export const authOptions: NextAuthOptions = {
+  secret: env.NEXTAUTH_SECRET,
   pages: {
     signIn: '/sign-in',
     signOut: '/sign-out',

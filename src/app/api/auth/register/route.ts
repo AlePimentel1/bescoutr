@@ -35,8 +35,6 @@ export async function POST(req: NextRequest) {
 
         const { email, username, password } = zBody.data;
 
-        console.log('quedandose aca 1')
-
         // const existingUserByEmail = await User.findOne({ email: email })
         // if (existingUserByEmail) {
         //     return NextResponse.json({ message: `User with this email: ${email} already exists`, success: false }, { status: 400 })
@@ -47,8 +45,6 @@ export async function POST(req: NextRequest) {
         // if (existingUserByUsername) {
         //     return NextResponse.json({ message: `User with this username: ${username} already exists`, success: false }, { status: 400 })
         // }
-
-        console.log(env.MONGODB_URI)
 
         const hashPassword = await hash(password, 10)
 
