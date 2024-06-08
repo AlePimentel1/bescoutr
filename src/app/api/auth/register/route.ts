@@ -35,16 +35,16 @@ export async function POST(req: NextRequest) {
 
         const { email, username, password } = zBody.data;
 
-        // const existingUserByEmail = await User.findOne({ email: email })
-        // if (existingUserByEmail) {
-        //     return NextResponse.json({ message: `User with this email: ${email} already exists`, success: false }, { status: 400 })
-        // }
+        const existingUserByEmail = await User.findOne({ email: email })
+        if (existingUserByEmail) {
+            return NextResponse.json({ message: `User with this email: ${email} already exists`, success: false }, { status: 400 })
+        }
 
-        // console.log('quedandose aca 2')
-        // const existingUserByUsername = await User.findOne({ username: username })
-        // if (existingUserByUsername) {
-        //     return NextResponse.json({ message: `User with this username: ${username} already exists`, success: false }, { status: 400 })
-        // }
+        console.log('quedandose aca 2')
+        const existingUserByUsername = await User.findOne({ username: username })
+        if (existingUserByUsername) {
+            return NextResponse.json({ message: `User with this username: ${username} already exists`, success: false }, { status: 400 })
+        }
 
         const hashPassword = await hash(password, 10)
 
