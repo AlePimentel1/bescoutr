@@ -9,6 +9,7 @@ import Google from "next-auth/providers/google";
 import { env } from "@/env";
 import User from "@/models/User";
 import { compare } from "bcrypt";
+import dbConnect from "@/lib/mongoDb";
 
 
 /**
@@ -40,17 +41,32 @@ declare module "next-auth" {
 export const authOptions: NextAuthOptions = {
   secret: env.NEXTAUTH_SECRET,
   pages: {
-    signIn: '/sign-in',
-    signOut: '/sign-out',
+    signIn: '/login',
+    signOut: '/signout',
   },
   callbacks: {
-    session: ({ session, token }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: token.sub,
-      },
-    }),
+    async jwt({ token, user, account, profile }) {
+      if (user) {
+        return {
+          ...token,
+          user: user
+        }
+      }
+      return token;
+    },
+    async session({ session, token, user }) {
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          username: token.username,
+        },
+      }
+    },
+
+    async redirect({ url, baseUrl }) {
+      return baseUrl
+    }
   },
   providers: [
     Credentials({
@@ -61,21 +77,29 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials, req) {
         if (!credentials?.email || !credentials?.password) return null
+        try {
 
-        console.log(credentials, '============', req)
+          await dbConnect()
 
-        const existingUser = await User.findOne({ email: credentials?.email });
+          const existingUser = await User.findOne({ email: credentials?.email });
+          if (!existingUser) throw new Error('User not found');
 
-        if (!existingUser) return null;
 
-        const isValidPassword = await compare(credentials?.password, existingUser.password);
+          const isValidPassword = await compare(credentials?.password, existingUser.password);
+          if (!isValidPassword) throw new Error('Invalid password');
 
-        if (!isValidPassword) return null;
+          if (!existingUser.active) {
+            throw new Error('User is not active');
+          }
 
-        return {
-          id: existingUser._id as string,
-          username: existingUser.username,
-          email: existingUser.email,
+          return {
+            id: existingUser._id + '',
+            username: existingUser.username,
+            email: existingUser.email,
+          }
+        } catch (error) {
+          console.log(error)
+          return null;
         }
       }
     }),

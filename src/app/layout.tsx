@@ -1,9 +1,10 @@
-import NavMenu from "@/components/NavMenu";
 import SessionProvider from "@/components/SessionProvider";
+import { Toaster } from "@/components/ui/sonner";
 import "@/styles/globals.css";
 
 import { GeistSans } from "geist/font/sans";
 import { getServerSession } from "next-auth";
+import { CSPostHogProvider } from "./_analytics/provider";
 
 
 export const metadata = {
@@ -25,9 +26,12 @@ export default async function RootLayout({
       <body>
         <main>
           <SessionProvider session={session}>
-            {children}
+            <CSPostHogProvider>
+              {children}
+            </CSPostHogProvider>
           </SessionProvider>
         </main>
+        <Toaster richColors />
       </body>
     </html>
   );

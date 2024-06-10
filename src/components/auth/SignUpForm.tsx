@@ -9,6 +9,9 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { registerUser } from '@/actions/auth';
+import { Toaster } from '@/components/ui/sonner';
+import { toast } from 'sonner';
+import { redirect, useRouter } from 'next/navigation';
 
 const FormSchema = z
     .object({
@@ -27,6 +30,8 @@ const FormSchema = z
 
 
 const SignUpForm = () => {
+    const router = useRouter();
+
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
@@ -38,18 +43,27 @@ const SignUpForm = () => {
     });
 
     const onSubmit = async (values: z.infer<typeof FormSchema>) => {
+        try {
 
-        const response = await registerUser({
-            username: values.username,
-            email: values.email,
-            password: values.password,
-        })
+            const response = await registerUser({
+                username: values.username,
+                email: values.email,
+                password: values.password,
+            })
+
+            if (response.success) {
+                toast.success(response.message)
+                router.push('/sign-in')
+            }
+        } catch (e) {
+            console.log(e)
+            toast.error('Ocurrió un error al registrar el usuario')
+        }
     };
 
     return (
         <div className='flex flex-col items-center justify-center space-y-6'>
             <h1 className='text-white text-4xl'>Bienvenido a Scoutr</h1>
-
             <div className='flex flex-col border rounded-lg p-6 h-auto w-[420px] bg-white space-y-4'>
                 <h2 className='text-2xl text-start font-semibold'>Sign up</h2>
                 <Form {...form}>
@@ -127,10 +141,11 @@ const SignUpForm = () => {
             </div>
             <p className='text-center text-sm text-white mt-2'>
                 If you have an account, please&nbsp;
-                <Link className='text-blue-500 hover:underline' href='/sign-in'>
+                <Link className='text-blue-500 hover:underline' href='/signin'>
                     Sign in
                 </Link>
             </p>
+            <Toaster richColors />
         </div>
     );
 };

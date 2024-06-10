@@ -1,6 +1,5 @@
 'use client';
 
-
 import * as z from 'zod';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
@@ -9,6 +8,8 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import posthog from 'posthog-js';
 
 const FormSchema = z.object({
     email: z.string().min(1, 'Email is required').email('Invalid email'),
@@ -19,6 +20,7 @@ const FormSchema = z.object({
 });
 
 const SignInForm = () => {
+    const router = useRouter()
     const contextForm = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
@@ -28,12 +30,11 @@ const SignInForm = () => {
     });
 
     const onSubmit = async (values: z.infer<typeof FormSchema>) => {
-        const signInData = await signIn('credentials', {
+        await signIn('credentials', {
             email: values.email,
             password: values.password,
         })
-        console.log(signInData);
-    };
+    }
 
     return (
         <div className='flex flex-col items-center justify-center space-y-6'>
@@ -89,12 +90,11 @@ const SignInForm = () => {
             </div>
             <p className='text-center text-sm text-white mt-2'>
                 If you don&apos;t have an account, please&nbsp;
-                <Link className='text-blue-500 hover:underline' href='/sign-up'>
+                <Link className='text-blue-500 hover:underline' href='/signup'>
                     Sign up
                 </Link>
             </p>
-        </div>
-
+        </div >
     );
 };
 

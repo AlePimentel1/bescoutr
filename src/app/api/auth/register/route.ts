@@ -1,7 +1,9 @@
 import { env } from "@/env";
 import dbConnect from "@/lib/mongoDb";
 import User from "@/models/User";
+import VerificationToken from "@/models/VerificationToken";
 import { hash } from "bcrypt";
+import { randomUUID } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
@@ -9,15 +11,6 @@ type ResponseData = {
     message: string | Object;
     success: boolean;
 };
-
-// export async function POST(req: NextApiRequest, res: NextApiResponse<ResponseData>) {
-//     await dbConnect();
-//     if (req.method === 'POST') {
-//         return register(req, res);
-//     }
-
-//     res.status(404).json({ message: 'Route Not Found', success: false });
-// }
 
 const userSchema = z.object({
     email: z.string().min(1, 'Email is required').email('Invalid email'),
@@ -40,7 +33,6 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ message: `User with this email: ${email} already exists`, success: false }, { status: 400 })
         }
 
-        console.log('quedandose aca 2')
         const existingUserByUsername = await User.findOne({ username: username })
         if (existingUserByUsername) {
             return NextResponse.json({ message: `User with this username: ${username} already exists`, success: false }, { status: 400 })
@@ -48,17 +40,20 @@ export async function POST(req: NextRequest) {
 
         const hashPassword = await hash(password, 10)
 
-        const newUser = new User({
+        const newUser = await new User({
             username,
             email,
             password: hashPassword
         }).save()
 
-        // return NextResponse.redirect(new URL('/log-in'), { status: 201 })
+        const token = await new VerificationToken({
+            token: `${randomUUID()}-${randomUUID()}`.replace(/-/g, ''),
+            user: newUser._id
+        }).save()
+
         return NextResponse.json({ message: "User created successfully", success: true }, { status: 201 });
 
     } catch (error) {
-        console.log(error)
         return NextResponse.json({ message: "SERVER_ERROR", success: false }, { status: 500 });
     }
 }
