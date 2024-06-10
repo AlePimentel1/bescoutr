@@ -13,5 +13,6 @@ export default function page() {
                 DashboardPage {JSON.stringify(status)}
             </div>
         </>
+
     )
 }

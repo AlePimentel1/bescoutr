@@ -39,8 +39,7 @@ const SignInForm = () => {
     return (
         <div className='flex flex-col items-center justify-center space-y-6'>
             <h1 className='text-white text-4xl'>Bienvenido a Scoutr</h1>
-
-            <div className='flex flex-col border rounded-lg p-6 h-auto w-[420px] bg-white space-y-4'>
+            <div className='flex flex-col border rounded-lg p-6 h-auto w-full md:w-[420px] bg-white space-y-4'>
                 <h2 className='text-2xl text-start font-semibold'>Sign in</h2>
                 <Form {...contextForm}>
                     <form onSubmit={contextForm.handleSubmit(onSubmit)} className='w-full'>

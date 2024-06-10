@@ -64,11 +64,11 @@ const SignUpForm = () => {
     return (
         <div className='flex flex-col items-center justify-center space-y-6'>
             <h1 className='text-white text-4xl'>Bienvenido a Scoutr</h1>
-            <div className='flex flex-col border rounded-lg p-6 h-auto w-[420px] bg-white space-y-4'>
+            <div className='flex flex-col border rounded-lg p-6 h-auto w-full md:w-[420px] bg-white space-y-4'>
                 <h2 className='text-2xl text-start font-semibold'>Sign up</h2>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className='w-full'>
-                        <div className='space-y-2'>
+                        <div className='space-y-4'>
                             <FormField
                                 control={form.control}
                                 name='username'
@@ -141,11 +141,11 @@ const SignUpForm = () => {
             </div>
             <p className='text-center text-sm text-white mt-2'>
                 If you have an account, please&nbsp;
-                <Link className='text-blue-500 hover:underline' href='/signin'>
+                <Link className='text-blue-500 hover:underline' href='/login'>
                     Sign in
                 </Link>
             </p>
-            <Toaster richColors />
+            {/* <Toaster richColors /> */}
         </div>
     );
 };
