@@ -11,7 +11,6 @@ import User from "@/models/User";
 import { compare } from "bcrypt";
 import dbConnect from "@/lib/mongoDb";
 
-
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
  * object and keep type safety.
@@ -22,8 +21,8 @@ declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
       id: string;
-      // ...other properties
-      // role: UserRole;
+      username: string;
+      email: string;
     } & DefaultSession["user"];
   }
 
@@ -46,26 +45,32 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async jwt({ token, user, account, profile }) {
+      // Si hay un user, significa que estamos iniciando sesión, así que añadimos sus datos al token
       if (user) {
         return {
           ...token,
-          user: user
-        }
+          id: user.id,
+          email: user.email,
+          username: user.username,
+        };
       }
+      // Si no hay un user, solo devolvemos el token tal cual
       return token;
     },
     async session({ session, token, user }) {
+      // Añadimos los campos personalizados del token a la sesión
       return {
         ...session,
         user: {
           ...session.user,
+          id: token.id,
           username: token.username,
+          email: token.email,
         },
-      }
+      };
     },
-
     async redirect({ url, baseUrl }) {
-      return baseUrl
+      return baseUrl;
     }
   },
   providers: [
@@ -76,14 +81,12 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Contraseña", type: "password" },
       },
       async authorize(credentials, req) {
-        if (!credentials?.email || !credentials?.password) return null
+        if (!credentials?.email || !credentials?.password) return null;
         try {
-
-          await dbConnect()
+          await dbConnect();
 
           const existingUser = await User.findOne({ email: credentials?.email });
           if (!existingUser) throw new Error('User not found');
-
 
           const isValidPassword = await compare(credentials?.password, existingUser.password);
           if (!isValidPassword) throw new Error('Invalid password');
@@ -92,13 +95,15 @@ export const authOptions: NextAuthOptions = {
             throw new Error('User is not active');
           }
 
-          return {
-            id: existingUser._id + '',
+          const user = {
+            id: existingUser._id.toString(),
             username: existingUser.username,
             email: existingUser.email,
-          }
+          };
+          return user;
+
         } catch (error) {
-          console.log(error)
+          console.log(error);
           return null;
         }
       }
@@ -107,15 +112,7 @@ export const authOptions: NextAuthOptions = {
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
     }),
-    /**
-     * ...add more providers here.
-     *
-     * Most other providers require a bit more work than the Discord provider. For example, the
-     * GitHub provider requires you to add the `refresh_token_expires_in` field to the Account
-     * model. Refer to the NextAuth.js docs for the provider you want to use. Example:
-     *
-     * @see https://next-auth.js.org/providers/github
-     */
+    // Add more providers here.
   ],
 };
 

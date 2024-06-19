@@ -5,6 +5,7 @@ import "@/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 import { getServerSession } from "next-auth";
 import { CSPostHogProvider } from "./_analytics/provider";
+import { authOptions } from "@/server/auth";
 
 
 export const metadata = {
@@ -19,7 +20,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
 
-  const session = await getServerSession()
+  const session = await getServerSession(authOptions)
 
   return (
     <html lang="es" className={`${GeistSans.variable}`}>
