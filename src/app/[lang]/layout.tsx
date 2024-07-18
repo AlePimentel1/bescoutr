@@ -4,8 +4,10 @@ import "@/styles/globals.css";
 
 import { GeistSans } from "geist/font/sans";
 import { getServerSession } from "next-auth";
-import { CSPostHogProvider } from "./_analytics/provider";
+import { CSPostHogProvider } from "../_analytics/provider";
 import { authOptions } from "@/server/auth";
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from "next-intl/server";
 
 
 export const metadata = {
@@ -16,19 +18,24 @@ export const metadata = {
 
 export default async function RootLayout({
   children,
+  params: { locale }
 }: {
   children: React.ReactNode;
+  params: { locale: string };
 }) {
 
   const session = await getServerSession(authOptions)
+  const messages = await getMessages()
 
   return (
-    <html lang="es" className={`${GeistSans.variable}`}>
+    <html lang={locale} className={`${GeistSans.variable}`}>
       <body>
         <main>
           <SessionProvider session={session}>
             <CSPostHogProvider>
-              {children}
+              <NextIntlClientProvider messages={messages}>
+                {children}
+              </NextIntlClientProvider>
             </CSPostHogProvider>
           </SessionProvider>
         </main>
