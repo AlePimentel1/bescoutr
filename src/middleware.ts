@@ -7,6 +7,6 @@ export default createMiddleware({
 
 export const config = {
     matcher: [
-        '/((?!login|api|signup|activate|_next|_vercel).*)',
+        '/((?!api|activate|_next|_vercel).*)',
     ]
 }

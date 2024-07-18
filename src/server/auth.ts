@@ -70,7 +70,9 @@ export const authOptions: NextAuthOptions = {
       };
     },
     async redirect({ url, baseUrl }) {
-      return baseUrl;
+      const urlObj = new URL(url);
+      const lang = urlObj.searchParams.get('lang') || 'en';
+      return `${baseUrl}/${lang}`;
     }
   },
   providers: [
