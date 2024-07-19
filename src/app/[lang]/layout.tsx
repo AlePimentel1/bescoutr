@@ -13,9 +13,8 @@ import { getMessages } from "next-intl/server";
 export const metadata = {
   title: "Scoutr",
   description: "Somos una plataforma que impulsa a los scoutrs a alcanzar sus metas y sueños.",
-  icons: [{ rel: "icon", url: "/favicon.png", type: 'image/png' }],
+  icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
-
 
 export default async function RootLayout({
   children,
