@@ -4,11 +4,11 @@ import "@/styles/globals.css";
 
 import { GeistSans } from "geist/font/sans";
 import { getServerSession } from "next-auth";
-import { CSPostHogProvider } from "../_analytics/provider";
+import { CSPostHogProvider } from "./_analytics/provider";
 import { authOptions } from "@/server/auth";
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from "next-intl/server";
-
+import { brockmann } from "@/lib/fonts";
 
 export const metadata = {
   title: "Scoutr",
@@ -28,7 +28,7 @@ export default async function RootLayout({
   const messages = await getMessages()
 
   return (
-    <html lang={locale} className={`${GeistSans.variable}`}>
+    <html lang={locale} className={brockmann.className}>
       <body>
         <main>
           <SessionProvider session={session}>
@@ -41,6 +41,6 @@ export default async function RootLayout({
         </main>
         <Toaster richColors />
       </body>
-    </html>
+    </html >
   );
 }
