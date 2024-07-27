@@ -1,5 +1,4 @@
 'use client'
-import { Header } from "@/components/nav/Header";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 
