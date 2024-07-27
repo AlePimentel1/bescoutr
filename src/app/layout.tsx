@@ -9,6 +9,7 @@ import { authOptions } from "@/server/auth";
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from "next-intl/server";
 import { brockmann } from "@/lib/fonts";
+import { Header } from "@/components/nav/Header";
 
 export const metadata = {
   title: "Scoutr",

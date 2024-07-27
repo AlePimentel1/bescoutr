@@ -1,4 +1,5 @@
 'use client'
+import { Header } from "@/components/nav/Header";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 
@@ -13,7 +14,12 @@ export default function HomePage() {
       <h1 className="text-5xl tracking-tight text-black sm:text-[5rem]">
         {dict("title")}
       </h1>
+      <h1 className="text-5xl tracking-tight text-black sm:text-[5rem]">
+        {dict("title")}
+      </h1>
+      <h1 className="text-5xl tracking-tight  sm:text-[5rem]">
+        {dict("title")}
+      </h1>
     </div>
-    // </main>
   );
 }
