@@ -79,7 +79,7 @@ const config = {
           DEFAULT: "#62E78A",
         },
         'night-sky': {
-          50: "#E6E8EB",
+          50: "#F3F5F7",
           100: "#B3B8BF",
           200: "#8E95A1",
           300: "#5A6576",
