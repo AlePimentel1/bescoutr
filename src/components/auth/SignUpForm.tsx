@@ -53,7 +53,7 @@ const SignUpForm = () => {
 
             if (response.success) {
                 toast.success(response.message)
-                router.push('/sign-in')
+                router.push('/login')
             }
         } catch (e) {
             console.log(e)

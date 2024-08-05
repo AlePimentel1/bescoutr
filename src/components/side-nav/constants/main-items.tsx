@@ -33,23 +33,23 @@ export const mainMenuItems: MainMenuItems[] = [
         childrens: []
     },
     {
-        label: "Timeline",
-        href: "/timeline",
+        label: "Feed",
+        href: "/feed",
         icon: <GalleryVerticalEnd size={24} />,
         isAccordion: false,
         open: [],
-        value: "timeline",
-        slug: "/timeline",
+        value: "feed",
+        slug: "/feed",
         childrens: []
     },
     {
-        label: "Chat",
-        href: "/chat",
+        label: "Messages",
+        href: "/messages",
         icon: <MessageCircle size={24} />,
         isAccordion: false,
         open: [],
-        value: "chat",
-        slug: "/chat",
+        value: "messages",
+        slug: "/messages",
         childrens: []
     },
     {
