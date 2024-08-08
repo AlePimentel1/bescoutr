@@ -24,7 +24,7 @@ export default function RecentNewsCard({ title, date, image }: RecentNewsCardPro
                     <CardTitle className="text-[14px] text-white">{title}</CardTitle>
                     <span className="flex flex-row gap-1 items-center">
                         <Calendar size={16} className="text-neutral-500" />
-                        <CardDescription className="text-[12px] text-neutral-500">{format(date, 'MMM dd, YYY')}</CardDescription>
+                        <CardDescription className="text-[12px] text-neutral-500">{format(date, 'MMM dd, yyy')}</CardDescription>
                     </span>
                     <span className="flex flex-row gap-1 items-center">
                         <Clock size={16} className="text-neutral-500" />

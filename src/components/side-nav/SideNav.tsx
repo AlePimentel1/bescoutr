@@ -17,18 +17,32 @@ const SideNav = ({ isCollapsed = false, openMenu = false }: SideNavProps) => {
     const slug = usePathnameWithoutIntl()
 
     return (
-        <div className="flex flex-col min-h-screen m-auto">
-            {/* <header
-                className={cn("w-full flex border-b lg:hidden top-0 fixed items-center h-[50px] bg-white justify-between px-5 shrink-0")}
+        <div className="flex flex-col">
+            {/* THIS IS THE HEADER ON MOBILE */}
+            <header
+                className={cn("w-full flex lg:hidden items-center h-[50px] bg-white bg-opacity-5 justify-between px-5 shrink-0")}
             >
-                <PanelRightOpen /> */}
-            {/* <ButtonToOpenMenu onClick={() => handleOpenMenu(!openMenu)} /> */}
-            {/* </header> */}
-            <main className={`bg-night-sky-900 duration-75 flex flex-grow`}
+                <PanelRightOpen />
+                {/* <ButtonToOpenMenu onClick={() => handleOpenMenu(!openMenu)} /> */}
+            </header>
+            <main className={`duration-75 hidden lg:flex lg:flex-grow lg:overflow-y-auto relative`}
             // style={{
             //     paddingLeft: isMobile ? '0px' : isCollapsed ? !!isSubMenuActive ? !isMobile ? `calc(68px + ${paddingToUse}px)` : '0px' : '68px' : !!isSubMenuActive && !isMobile ? `calc(68px + ${paddingToUse}px)` : '210px'
             // }}
             >
+                <span
+                    className="w-[75%] h-10 -top-[30px] bg-caribbean-green-500"
+                    style={{
+                        position: 'absolute',
+                        left: '50%',
+                        background: 'radial-gradient(circle, rgba(98,231,138,0.5) 20%, rgba(98,231,138,0.4) 70%)',
+                        borderRadius: '0 0 80px 80px', // Ajusta el borde para crear un semicírculo hacia abajo
+                        boxShadow: '0 0 80px 30px rgba(98,231,138,0.4)',
+                        transform: 'translate(-50%, -50%)',
+                        zIndex: -999,
+                    }}
+                />
+
                 <div className={`flex w-max lg:left-0 ${openMenu ? "left-0" : "-left-full"} duration-200 ease-in-out bg-white bg-opacity-5 h-[100vh]`}>
                     <div className={`w-full`}>
                         <aside className={`flex flex-col lg:left-0  h-[100vh] overflow-y-auto`}>

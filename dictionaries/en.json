@@ -1,5 +1,8 @@
 {
     "HomePage": {
-      "title": "Hello world!"
+      "PlayerOfTheDay": {
+        "title": "Player of the day",
+        "button": "View profile"
+      }
     }
   }
