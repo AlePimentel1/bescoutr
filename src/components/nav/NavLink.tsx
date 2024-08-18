@@ -15,17 +15,26 @@ export default function NavLink({
     currentSlug,
 }: any) {
     const isSelect = (slug && currentSlug && slug === currentSlug) || isSelected
-
     return (
         <SideBarTooltip content={label} active={isCollapsedMenu}>
             <Link
                 href={onAction ? 'javascript:void(0)' : href}
                 className={cn(
-                    `flex relative  ${isCollapsedMenu
-                        ? "lg:px-0  lg:justify-start hover:bg-blue-100   lg:text-start lg:h-[38px] lg:w-[42px] lg:py-[10px] "
-                        : "hover:bg-blue-100 h-[30px] truncate"
-                    } ${isSelect ? isCollapsedMenu ? 'lg:bg-primary text-white hover:bg-primary/80' : 'bg-blue-100' : ""
-                    } shrink-0 items-center px-2 justify-between py-[5px]  whitespace-nowrap rounded-[4px] group `,
+                    // base styles
+                    `flex relative lg:rounded-xl
+                    ${isCollapsedMenu
+                        // collapsed styles (not open)
+                        ? "lg:px-0  lg:justify-start hover:bg-white hover:bg-opacity-5 lg:text-start lg:h-[38px] lg:w-[42px] lg:py-[10px] "
+                        // not collapsed styles
+                        : "hover:bg-white hover:bg-opacity-5 h-[50px] truncate text-neutral-500"
+                    } 
+                        ${isSelect ? isCollapsedMenu ?
+                        // collapsed styles and selected
+                        'lg:bg-primary text-white hover:bg-primary/80' :
+                        // not collapsed styles and selected
+                        'bg-white bg-opacity-5' : ""
+                    } 
+                    shrink-0 items-center px-2 justify-between py-[5px]  whitespace-nowrap rounded-[4px] group `,
                     className
                 )}
                 target={target}
@@ -33,7 +42,7 @@ export default function NavLink({
                 onClick={onAction}
             >
                 <div className={`${isCollapsedMenu ? 'lg:justify-center' : ''} flex items-center  w-full h-full gap-2`}>
-                    <span className={`flex ${!isCollapsedMenu ? 'flex' : 'lg:hidden'} items-center text-[14px] gap-1 font-medium`}>
+                    <span className={`flex ${!isCollapsedMenu ? 'flex' : 'lg:hidden'} ${isSelect ? 'text-white' : 'text-neutral-500'} items-center text-[14px] gap-1 font-medium`}>
                         {label}
                     </span>
                 </div>

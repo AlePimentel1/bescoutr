@@ -1,5 +1,51 @@
 {
     "HomePage": {
-      "title": "Hola mundo"
+      "WelcomeText": "Bienvenido",
+      "PlayerOfTheDay": {
+          "title": "Juador del día",
+          "button": "Ver perfil"
+      },
+      "RecentNews": {
+        "title": "Noticias recientes",
+        "button": "Ver más"
+      },
+      "TrendingPlayers": {
+        "title": "Jugadores tendencia",
+        "button": "Ver más"
     }
+  },
+  "Header": {
+    "SearchBar": {
+      "placeholder": "Buscar",
+      "filterButton": "Añadir filtro",
+      "recentSearches": "Búsquedas recientes"
+    },
+   "DropDown": {
+        "AccountSettings": {
+          "title": "Ajustes de cuenta",
+          "EditProfile": "Editar perfil",
+          "Security": "Seguridad"
+        },
+        "Help": {
+          "title": "Ayuda",
+          "HelpCenter": "Centro de ayuda",
+          "ContactUs": "Contáctanos"
+        },
+        "Legal": {
+          "title": "Legal",
+          "PrivacySettings": "Configuración de privacidad",
+          "PrivacyPolicy": "Políticas de privacidad",
+          "TermsAndConditions": "Términos y condiciones"
+      }
+    }
+  },
+  "Navigation": {
+    "Home": "Inicio",
+    "Feed": "Feed",
+    "Messages": "Mensajes",
+    "Rankings": "Rankings",
+    "Leagues": "Ligas",
+    "Profile": "Mi perfil",
+    "JobBoard": "Empleos"
   }
+}

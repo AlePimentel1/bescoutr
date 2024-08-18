@@ -57,14 +57,14 @@ export default function NavItem({
                 <SideBarTooltip content={toolTipContent || label} active={isCollapsedMenu}>
                     <div className={`relative w-full items-center group flex ${isCollapsedMenu ? 'lg:w-[42px] h-[38px]' : 'gap-2'}`}>
                         {
-                            isAccordion && <AccordionTrigger className={`absolute ${isCollapsedMenu ? '[&>span>svg]:w-[13px] [&>span>svg]:h-[13px] -left-[13px]' : '-left-[10px] w-4 [&>span>svg]:w-[12px] [&>span>svg]:h-[12px]'}  bottom-0 m-auto top-0 [&>svg]:hidden [&[data-state=open]>span>svg]:rotate-90 text-neutral-600`}>
+                            isAccordion && <AccordionTrigger className={`absolute ${isCollapsedMenu ? '[&>span>svg]:w-[13px] [&>span>svg]:h-[13px] -left-[13px]' : '-left-[8px] w-4 [&>span>svg]:w-[16px] [&>span>svg]:h-[16px]'} bottom-0 m-auto top-0 [&>svg]:hidden [&[data-state=open]>span>svg]:rotate-90 text-neutral-600`}>
                                 <span>
                                     <ChevronRight className="transition-transform" />
                                 </span>
                             </AccordionTrigger>
                         }
                         {
-                            !isCollapsedMenu && isItemSelected && <span className={`absolute my-auto -left-[2.5px] h-[65%] w-1 bg-caribbean-green-500 rounded-l-2xl`}></span>
+                            !isCollapsedMenu && isItemSelected && !isAccordion && <span className={`absolute my-auto -left-[2.5px] h-[65%] w-1 bg-primary rounded-l-2xl`}></span>
                         }
                         <Link
                             onClick={() => router.push(href)}
@@ -80,7 +80,7 @@ export default function NavItem({
                                         // collapsed styles and not selected
                                         'lg:hover:bg-white lg:hover:bg-opacity-5'} flex lg:h-[38px] lg:items-center` :
                                     // not collapsed styles
-                                    `hover:bg-white hover:bg-opacity-5 h-[56px] px-6  ${isItemSelected ? 'bg-white bg-opacity-5' : ''}`} 
+                                    `hover:bg-white hover:bg-opacity-5 h-[50px] px-6  ${isItemSelected ? 'bg-white bg-opacity-5' : ''}`} 
                                 ${isCollapsedMenu ? isItemSelected ?
                                     // collapsed styles and selected
                                     'lg:bg-primary' :

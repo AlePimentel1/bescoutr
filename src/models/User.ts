@@ -14,6 +14,9 @@ export interface IUser extends Document {
     accountType: 'scout' | 'fan';
     favouriteTeams: string[];
     favouriteLeagues: string[];
+    profilePicture?: string;
+    firstName?: string;
+    lastName?: string;
 }
 
 
@@ -29,6 +32,9 @@ export const UserSchema = new mongoose.Schema<IUser>({
     accountType: { type: String, enum: ['scout', 'fan'], required: true },
     favouriteTeams: [{ type: String, default: [] }],
     favouriteLeagues: [{ type: String, default: [] }],
+    profilePicture: { type: String, default: '' },
+    firstName: { type: String, default: '' },
+    lastName: { type: String, default: '' },
 }, { timestamps: true });
 
 UserSchema.index({ email: 1, username: 1 }, { unique: true });

@@ -16,7 +16,7 @@ export default function NavBar({
     slug = '/',
 }: NavBarProps) {
 
-    const { valueOfSubMenues, handleChangeValue, isCollapsedMenu = false } = {}
+    const { valueOfSubMenues = [], handleChangeValue = () => { }, isCollapsedMenu = false } = {}
 
     return (
         <>

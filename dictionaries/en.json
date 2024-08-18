@@ -1,8 +1,51 @@
 {
     "HomePage": {
+      "WelcomeText": "Welcome",
       "PlayerOfTheDay": {
         "title": "Player of the day",
         "button": "View profile"
+      },
+      "RecentNews": {
+        "title": "Recent news",
+        "button": "See more"
+      },
+      "TrendingPlayers": {
+        "title": "Trending players",
+        "button": "See more"
       }
+    },
+    "Header": {
+      "SearchBar": {
+        "placeholder": "Search",
+        "filterButton": "Add filter",
+        "recentSearches": "Recent searches"
+      },
+      "DropDown": {
+        "AccountSettings": {
+          "title": "Account Settings",
+          "EditProfile": "Edit profile",
+          "Security": "Security"
+        },
+        "Help": {
+          "title": "Help",
+          "HelpCenter": "Help center",
+          "ContactUs": "Contact us"
+        },
+        "Legal": {
+          "title": "Legal",
+          "PrivacySettings": "Privacy settings",
+          "PrivacyPolicy": "Privacy policy",
+          "TermsAndConditions": "Terms and conditions"
+        }
+      }
+    },
+    "Navigation": {
+      "Home": "Home",
+      "Feed": "Feed",
+      "Messages": "Messages",
+      "Rankings": "Rankings",
+      "Leagues": "Leagues",
+      "Profile": "My profile",
+      "JobBoard": "Job board"
     }
-  }
+}

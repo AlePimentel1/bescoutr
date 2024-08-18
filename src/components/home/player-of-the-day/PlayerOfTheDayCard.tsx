@@ -19,7 +19,7 @@ export default function PlayerOfTheDayCard() {
             <CardHeader className="flex flex-row relative">
                 <div className="flex flex-row gap-5">
                     <span className="flex items-center justify-center bg-gradient-to-b from-[#243853] to-[#040B15] w-fit py-2 px-4 rounded-lg">
-                        <p className="tracking-wide">{dict('title')}</p>
+                        <p className="tracking-wide text-white">{dict('title')}</p>
                     </span>
                     <div className="flex flex-row gap-2">
                         <span className="flex items-center justify-center">

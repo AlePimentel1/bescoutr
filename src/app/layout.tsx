@@ -45,19 +45,9 @@ export default async function RootLayout({
           }}
         />
         <main>
-          <SessionProvider session={session} baseUrl="/">
-            <CSPostHogProvider>
-              <NextIntlClientProvider messages={messages}>
-                <div className="flex flex-col lg:flex-row">
-                  <SideNav />
-                  <div className="flex flex-col flex-1">
-                    <Header />
-                    {children}
-                  </div>
-                </div>
-              </NextIntlClientProvider>
-            </CSPostHogProvider>
-          </SessionProvider>
+          <NextIntlClientProvider messages={messages}>
+            {children}
+          </NextIntlClientProvider>
         </main>
         <Toaster richColors />
       </body>
