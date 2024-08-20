@@ -1,14 +1,12 @@
-import SessionProvider from "@/components/SessionProvider";
-import { Toaster } from "@/components/ui/sonner";
-import "@/styles/globals.css";
-import SideNav from "@/components/side-nav/SideNav";
-import { brockmann } from "@/lib/fonts";
-import { authOptions } from "@/server/auth";
-import { getServerSession } from "next-auth";
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from "next-intl/server";
 import Header from "@/components/header/Header";
+import SessionProvider from "@/components/session/SessionProvider";
+import SideNav from "@/components/side-nav/SideNav";
+import { authOptions } from "@/server/auth";
+import "@/styles/globals.css";
+import { getServerSession } from "next-auth";
+import { getMessages } from "next-intl/server";
 import { CSPostHogProvider } from "../../_analytics/provider";
+import { Private } from "@/components/session/Private";
 
 export const metadata = {
     title: "Be Scoutr",
@@ -30,13 +28,15 @@ export default async function RootLayout({
     return (
         <SessionProvider session={session} baseUrl="/">
             <CSPostHogProvider>
-                <div className="flex flex-col lg:flex-row">
-                    <SideNav />
-                    <div className="flex flex-col flex-1">
-                        <Header />
-                        {children}
+                <Private>
+                    <div className="flex flex-col lg:flex-row">
+                        <SideNav />
+                        <div className="flex flex-col flex-1">
+                            <Header />
+                            {children}
+                        </div>
                     </div>
-                </div>
+                </Private>
             </CSPostHogProvider>
         </SessionProvider>
     );

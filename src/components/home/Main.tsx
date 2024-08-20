@@ -1,3 +1,4 @@
+'use client'
 import { useTranslations } from "next-intl";
 import PlayerOfTheDayCard from "./player-of-the-day/PlayerOfTheDayCard";
 import WeeklyChallengeCard from "./weekly-challenge/WeeklyChalengeCard";

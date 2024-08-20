@@ -1,3 +1,4 @@
+'use client'
 import RecentNews from "./news/recent-news/RecentNews";
 import TrendingPlayers from "./news/trending-players/TrendingPlayers";
 

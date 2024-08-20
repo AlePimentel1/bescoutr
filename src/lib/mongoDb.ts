@@ -6,7 +6,9 @@ function dbConnect(options: ConnectOptions = {}) {
     if (mongoose.connection.readyState >= 1) return;
 
     // otherwise, create a new connection
-    return mongoose.connect(env.MONGODB_URI, {
+    // is development, use local database
+
+    return mongoose.connect(env.NODE_ENV === 'development' ? 'mongodb://127.0.0.1:27017/bescoutr' : env.MONGODB_URI, {
         ...options
     });
 }

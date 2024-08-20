@@ -1,4 +1,4 @@
-import SessionProvider from "@/components/SessionProvider";
+import SessionProvider from "@/components/session/SessionProvider";
 import { Toaster } from "@/components/ui/sonner";
 import "@/styles/globals.css";
 import SideNav from "@/components/side-nav/SideNav";
