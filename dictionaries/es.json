@@ -2,7 +2,7 @@
     "HomePage": {
       "WelcomeText": "Bienvenido",
       "PlayerOfTheDay": {
-          "title": "Juador del día",
+          "title": "Jugador del día",
           "button": "Ver perfil"
       },
       "RecentNews": {
