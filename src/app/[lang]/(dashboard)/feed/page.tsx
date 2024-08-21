@@ -4,7 +4,7 @@ export default function FeedPage() {
 
     return (
         <div className="flex flex-row h-full">
-            Soy el feed lcdtm
+            <p className="text-white">Soy el feed</p>
         </div>
     );
 }
