@@ -4,19 +4,23 @@ import NavItem from "./NavItem";
 import { mainMenuItems } from "../side-nav/constants/main-items";
 import NavLink from "./NavLink";
 import CreateReportButton from "../side-nav/CreateReportButton";
-import { Briefcase } from "lucide-react";
+import { Briefcase, Menu } from "lucide-react";
+import { Button } from '@/components/ui/button';
 
 interface NavBarProps {
     handleOpenMenu: () => void
     slug: string
+    isMenuCollapsed: boolean
 }
 
 export default function NavBar({
     handleOpenMenu,
     slug = '/',
+    isMenuCollapsed = false,
 }: NavBarProps) {
 
-    const { valueOfSubMenues = [], handleChangeValue = () => { }, isCollapsedMenu = false } = {}
+    const valueOfSubMenues: any = []
+    const handleChangeValue = (value: any) => { }
 
     return (
         <>
@@ -27,7 +31,7 @@ export default function NavBar({
                         value={valueOfSubMenues}
                         type="multiple"
                     >
-                        <ul className={`mt-[2px] mb-2 ${isCollapsedMenu ? "px-[13px] " : "mt-2"} flex justify-between flex-col flex-grow space-y-2`}>
+                        <ul className={`mt-[2px] mb-2 ${isMenuCollapsed ? " " : "mt-2"} flex justify-between flex-col flex-grow space-y-2`}>
                             {mainMenuItems.map((item) => (
                                 <NavItem
                                     key={item.label}
@@ -38,7 +42,7 @@ export default function NavBar({
                                     open={item.open}
                                     value={item.value}
                                     isItemSelected={slug === item.slug}
-                                    isCollapsedMenu={isCollapsedMenu}
+                                    isMenuCollapsed={isMenuCollapsed}
                                 >
                                     {item.childrens && item.childrens.map((child) => (
                                         <NavLink
@@ -46,13 +50,15 @@ export default function NavBar({
                                             href={child.href}
                                             label={child.label}
                                             slug={child.slug}
-                                            isCollapsedMenu={isCollapsedMenu}
+                                            isCollapsedMenu={isMenuCollapsed}
                                             currentSlug={slug}
                                         />
                                     ))}
                                 </NavItem>
                             ))}
-                            <CreateReportButton />
+                            <li>
+                                <CreateReportButton isMenuCollapsed={isMenuCollapsed} />
+                            </li>
                             <NavItem
                                 key={'job-board'}
                                 href="/job-board"
@@ -61,10 +67,17 @@ export default function NavBar({
                                 open={[]}
                                 value="job-board"
                                 isAccordion={false}
-                                isCollapsedMenu={isCollapsedMenu}
+                                isMenuCollapsed={isMenuCollapsed}
                                 isItemSelected={slug === "/job-board"}
                                 children={null}
                             />
+                            <li className={`hidden ${isMenuCollapsed ? 'lg:flex items-center justify-center' : ''}`}>
+                                <Button
+                                    onClick={() => handleOpenMenu()}
+                                    className="px-0 w-[36px] h-[33px] m-auto relative hover:text-neutral-500 rounded-[5px] text-neutral-500 hover:bg-transparent focus:bg-primary focus:text-white" variant={'ghost'}>
+                                    <Menu size={23} />
+                                </Button>
+                            </li>
                         </ul>
                     </Accordion>
                 </nav>

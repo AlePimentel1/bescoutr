@@ -1,14 +1,8 @@
-import SessionProvider from "@/components/session/SessionProvider";
 import { Toaster } from "@/components/ui/sonner";
-import "@/styles/globals.css";
-import SideNav from "@/components/side-nav/SideNav";
 import { brockmann } from "@/lib/fonts";
-import { authOptions } from "@/server/auth";
-import { getServerSession } from "next-auth";
+import "@/styles/globals.css";
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from "next-intl/server";
-import { CSPostHogProvider } from "./_analytics/provider";
-import Header from "@/components/header/Header";
 
 export const metadata = {
   title: "Be Scoutr",
@@ -23,8 +17,6 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-
-  const session = await getServerSession(authOptions)
   const messages = await getMessages()
 
   return (

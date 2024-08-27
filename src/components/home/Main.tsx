@@ -7,19 +7,9 @@ import { useEffect, useState } from "react";
 
 export default function Main() {
     const dict = useTranslations('HomePage');
-    const [totalHeight, setTotalHeight] = useState(0);
-    // const headerHeight = document.getElementById('mainHeader')?.clientHeight || 0;
-    // const mobileNavHeight = document.getElementById('mobile-nav')?.clientHeight || 0;
-    // const totalHeight = headerHeight + mobileNavHeight;
-
-    useEffect(() => {
-        const headerHeight = document.getElementById('mainHeader')?.clientHeight || 0;
-        const mobileNavHeight = document.getElementById('mobile-nav')?.clientHeight || 0;
-        setTotalHeight(headerHeight + mobileNavHeight);
-    }, []);
 
     return (
-        <div className={`flex-1 flex flex-col px-4 gap-4 overflow-y-auto w-full`} style={{ height: `calc(100vh - ${totalHeight}px)`, scrollbarWidth: 'none' }}>
+        <div className="flex flex-col gap-4">
             <p className="text-white">{dict('WelcomeText')} Fulanito</p>
             <PlayerOfTheDayCard />
             <WeeklyChallengeCard />

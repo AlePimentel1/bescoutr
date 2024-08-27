@@ -1,15 +1,15 @@
 'use client';
 
-import * as z from 'zod';
-import Link from 'next/link';
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { signIn } from 'next-auth/react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
+import { Button } from '../ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
 import { Input } from '../ui/input';
-import { Button } from '../ui/button';
-import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import posthog from 'posthog-js';
+import { useTranslations } from 'next-intl';
 
 const FormSchema = z.object({
     email: z.string().min(1, 'Email is required').email('Invalid email'),
@@ -20,7 +20,9 @@ const FormSchema = z.object({
 });
 
 const SignInForm = () => {
+    const dict = useTranslations('Auth.Login')
     const router = useRouter()
+
     const contextForm = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
@@ -38,9 +40,11 @@ const SignInForm = () => {
 
     return (
         <div className='flex flex-col items-center justify-center space-y-6'>
-            <h1 className='text-white text-4xl'>Bienvenido a Scoutr</h1>
-            <div className='flex flex-col border rounded-lg p-6 h-auto w-full md:w-[420px] bg-white space-y-4'>
-                <h2 className='text-2xl text-start font-semibold'>Sign in</h2>
+            <div className='flex flex-col gap-1 items-center'>
+                <h1 className='text-white text-[64px] font-semibold'>{dict('title')}</h1>
+                <h2 className='text-sm font-normal text-neutral-300'>{dict('description')}</h2>
+            </div>
+            <div className='flex flex-col h-auto w-full md:w-[420px] space-y-4'>
                 <Form {...contextForm}>
                     <form onSubmit={contextForm.handleSubmit(onSubmit)} className='w-full'>
                         <div className='space-y-4'>
@@ -49,10 +53,11 @@ const SignInForm = () => {
                                 name='email'
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Email</FormLabel>
+                                        <FormLabel className='text-white font-normal'>{dict('email')}</FormLabel>
                                         <FormControl>
                                             <Input type='email'
                                                 placeholder='mail@example.com'
+                                                className='bg-white border-none bg-opacity-15 text-white'
                                                 {...field}
                                             />
                                         </FormControl>
@@ -65,11 +70,12 @@ const SignInForm = () => {
                                 name='password'
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Contraseña</FormLabel>
+                                        <FormLabel className='text-white font-normal'>{dict('password')}</FormLabel>
                                         <FormControl>
                                             <Input
                                                 type='password'
-                                                placeholder='Ingresá tu contraseña'
+                                                placeholder='********'
+                                                className='bg-white border-none bg-opacity-15 text-white'
                                                 {...field}
                                             />
                                         </FormControl>
@@ -79,18 +85,18 @@ const SignInForm = () => {
                             />
                         </div>
                         <Button className='w-full mt-6' type='submit'>
-                            Sign in
+                            {dict('submit')}
                         </Button>
                     </form>
                 </Form>
             </div>
-            <div className='mx-auto my-4 flex w-full items-center justify-evenly before:mr-4 before:block before:h-px before:flex-grow before:bg-stone-400 after:ml-4 after:block after:h-px after:flex-grow after:bg-stone-400 text-white'>
-                or
+            <div className='mx-auto my-4 flex w-full items-center justify-evenly before:mr-4 before:block before:h-px before:flex-grow before:bg-gradient-to-l before:from-stone-400 before:to-transparent after:ml-4 after:block after:h-px after:flex-grow after:bg-gradient-to-r after:from-stone-400 after:to-transparent text-neutral-300'>
+                {dict('divider').toLowerCase()}
             </div>
-            <p className='text-center text-sm text-white mt-2'>
-                If you don&apos;t have an account, please&nbsp;
-                <Link className='text-blue-500 hover:underline' href='/signup'>
-                    Sign up
+            <p className='text-center text-sm text-neutral-300'>
+                {`${dict('noAccount')} `}
+                <Link className='text-primary hover:underline' href='/signup'>
+                    {dict('register')}
                 </Link>
             </p>
         </div >

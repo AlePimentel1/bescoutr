@@ -12,6 +12,7 @@ import { registerUser } from '@/actions/auth';
 import { Toaster } from '@/components/ui/sonner';
 import { toast } from 'sonner';
 import { redirect, useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 const FormSchema = z
     .object({
@@ -30,6 +31,7 @@ const FormSchema = z
 
 
 const SignUpForm = () => {
+    const dict = useTranslations('Auth.Register')
     const router = useRouter();
 
     const form = useForm<z.infer<typeof FormSchema>>({
@@ -63,9 +65,11 @@ const SignUpForm = () => {
 
     return (
         <div className='flex flex-col items-center justify-center space-y-6'>
-            <h1 className='text-white text-4xl'>Bienvenido a Scoutr</h1>
-            <div className='flex flex-col border rounded-lg p-6 h-auto w-full md:w-[420px] bg-white space-y-4'>
-                <h2 className='text-2xl text-start font-semibold'>Sign up</h2>
+            <div className='flex flex-col gap-1 items-center'>
+                <h1 className='text-white text-[64px] font-semibold'>{dict('title')}</h1>
+                <h2 className='text-sm font-normal text-neutral-300'>{dict('description')}</h2>
+            </div>
+            <div className='flex flex-col h-auto w-full md:w-[420px] space-y-4'>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className='w-full'>
                         <div className='space-y-4'>
@@ -74,9 +78,11 @@ const SignUpForm = () => {
                                 name='username'
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Username</FormLabel>
+                                        <FormLabel className='text-white font-normal'>{dict('username')}</FormLabel>
                                         <FormControl>
-                                            <Input placeholder='johndoe' {...field} />
+                                            <Input placeholder='example_'
+                                                className='bg-white border-none bg-opacity-15 text-white'
+                                                {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -87,9 +93,11 @@ const SignUpForm = () => {
                                 name='email'
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Email</FormLabel>
+                                        <FormLabel className='text-white font-normal'>{dict('email')}</FormLabel>
                                         <FormControl>
-                                            <Input placeholder='mail@example.com' {...field} />
+                                            <Input placeholder='mail@example.com'
+                                                className='bg-white border-none bg-opacity-15 text-white'
+                                                {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -100,11 +108,12 @@ const SignUpForm = () => {
                                 name='password'
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Password</FormLabel>
+                                        <FormLabel className='text-white font-normal'>{dict('password')}</FormLabel>
                                         <FormControl>
                                             <Input
                                                 type='password'
-                                                placeholder='Enter your password'
+                                                placeholder='********'
+                                                className='bg-white border-none bg-opacity-15 text-white'
                                                 {...field}
                                             />
                                         </FormControl>
@@ -117,11 +126,12 @@ const SignUpForm = () => {
                                 name='confirmPassword'
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Re-Enter your password</FormLabel>
+                                        <FormLabel className='text-white font-normal'>{dict('confirmPassword')}</FormLabel>
                                         <FormControl>
                                             <Input
-                                                placeholder='Re-Enter your password'
+                                                placeholder='********'
                                                 type='password'
+                                                className='bg-white border-none bg-opacity-15 text-white'
                                                 {...field}
                                             />
                                         </FormControl>
@@ -131,21 +141,20 @@ const SignUpForm = () => {
                             />
                         </div>
                         <Button className='w-full mt-6' type='submit'>
-                            Sign up
+                            {dict('submit')}
                         </Button>
                     </form>
                 </Form>
             </div>
-            <div className=' text-white mx-auto my-4 flex w-full items-center justify-evenly before:mr-4 before:block before:h-px before:flex-grow before:bg-stone-400 after:ml-4 after:block after:h-px after:flex-grow after:bg-stone-400'>
-                or
+            <div className='mx-auto my-4 flex w-full items-center justify-evenly before:mr-4 before:block before:h-px before:flex-grow before:bg-gradient-to-l before:from-stone-400 before:to-transparent after:ml-4 after:block after:h-px after:flex-grow after:bg-gradient-to-r after:from-stone-400 after:to-transparent text-neutral-300'>
+                {dict('divider').toLowerCase()}
             </div>
-            <p className='text-center text-sm text-white mt-2'>
-                If you have an account, please&nbsp;
-                <Link className='text-blue-500 hover:underline' href='/login'>
-                    Sign in
+            <p className='text-center text-sm text-neutral-300'>
+                {`${dict('alreadyHaveAccount')} `}
+                <Link className='text-primary hover:underline' href='/login'>
+                    {dict('login')}
                 </Link>
             </p>
-            {/* <Toaster richColors /> */}
         </div>
     );
 };

@@ -46,6 +46,39 @@
       "Rankings": "Rankings",
       "Leagues": "Leagues",
       "Profile": "My profile",
-      "JobBoard": "Job board"
+      "JobBoard": "Job board",
+      "CreateReport": "Create new report"
+    },
+    "Auth": {
+      "Login": {
+        "title": "Sign In",
+        "description": "¡Welcome back! Please enter your credentials.",
+        "email": "Email",
+        "password": "Password",
+        "forgotPassword": "Forgot password?",
+        "submit": "Login",
+        "divider": "Or",
+        "noAccount": "¿Don't have an account?",
+        "register": "Sign up"
+      },
+      "Register": {
+        "title": "Register",
+        "description": "¡Welcome! Please enter your information to create an account.",
+        "username": "Username",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm password",
+        "submit": "Create account",
+        "divider": "Or",
+        "alreadyHaveAccount": "Already have an account?",
+        "login": "Login"
+      },
+      "ForgotPassword": {
+        "title": "Forgot password",
+        "email": "Email",
+        "sendButton": "Send",
+        "rememberPassword": "Remember your password?",
+        "login": "Login"
+      }
     }
 }

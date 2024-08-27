@@ -1,10 +1,23 @@
 'use client'
+import { Plus } from "lucide-react";
 import { Button } from "../ui/button";
+import { TooltipProvider } from "@/components/ui/tooltip"
+import { SideBarTooltip } from "../nav/NavLink";
+import { useTranslations } from "next-intl";
 
-export default function CreateReportButton() {
+interface CreateReportButtonProps {
+    isMenuCollapsed: boolean
+}
+
+export default function CreateReportButton({ isMenuCollapsed = false }: CreateReportButtonProps) {
+    const dict = useTranslations('Navigation')
     return (
-        <Button className="w-full h-[50px]" onClick={() => console.log('holaa')}>
-            Create new report
-        </Button>
+        <TooltipProvider>
+            <SideBarTooltip content={dict('CreateReport')} active={isMenuCollapsed}>
+                <Button className={`${isMenuCollapsed ? 'p-0' : ''} w-full`} onClick={() => console.log('holaa')}>
+                    {!isMenuCollapsed ? 'Create new report' : <Plus size={18} strokeWidth={3} className="text-neutral-500" />}
+                </Button>
+            </SideBarTooltip>
+        </TooltipProvider>
     )
 }
