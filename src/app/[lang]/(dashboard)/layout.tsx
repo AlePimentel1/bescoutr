@@ -4,6 +4,8 @@ import { authOptions } from "@/server/auth";
 import "@/styles/globals.css";
 import { getServerSession } from "next-auth";
 import { CSPostHogProvider } from "../../_analytics/provider";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
 
 export const metadata = {
     title: "Be Scoutr",
@@ -17,14 +19,17 @@ export default async function RootLayout({
     children: React.ReactNode;
 }) {
     const session = await getServerSession(authOptions)
+    const messages = await getMessages()
 
     return (
-        <SessionProvider session={session} baseUrl="/">
-            <CSPostHogProvider>
-                <Private>
-                    {children}
-                </Private>
-            </CSPostHogProvider>
-        </SessionProvider>
+        <NextIntlClientProvider messages={messages}>
+            <SessionProvider session={session} baseUrl="/">
+                <CSPostHogProvider>
+                    <Private>
+                        {children}
+                    </Private>
+                </CSPostHogProvider>
+            </SessionProvider>
+        </NextIntlClientProvider>
     );
 }

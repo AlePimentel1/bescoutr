@@ -1,8 +1,6 @@
 import { Toaster } from "@/components/ui/sonner";
 import { brockmann } from "@/lib/fonts";
 import "@/styles/globals.css";
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from "next-intl/server";
 
 export const metadata = {
   title: "Be Scoutr",
@@ -17,7 +15,6 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  const messages = await getMessages()
 
   return (
     <html lang={locale} className={brockmann.className}>
@@ -37,9 +34,7 @@ export default async function RootLayout({
           }}
         />
         <main>
-          <NextIntlClientProvider messages={messages}>
-            {children}
-          </NextIntlClientProvider>
+          {children}
         </main>
         <Toaster richColors />
       </body>
