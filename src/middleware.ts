@@ -22,6 +22,6 @@ export default function handler(req: NextRequest) {
 
 export const config = {
     matcher: [
-        '/((?!api|_next|_vercel|favicon.ico|_not-found).*)',
+        '/((?!api|_next|_vercel|favicon.ico|activate).*)',
     ],
 };
