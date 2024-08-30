@@ -36,7 +36,8 @@
           "PrivacySettings": "Privacy settings",
           "PrivacyPolicy": "Privacy policy",
           "TermsAndConditions": "Terms and conditions"
-        }
+        },
+        "Logout": "Logout"
       }
     },
     "Navigation": {

@@ -78,7 +78,7 @@ export const SettingsDropdown = () => {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem className="py-2.5 focus:bg-black focus:bg-opacity-15 focus:rounded-lg focus:text-white" onClick={() => signOut()}>
                     <LogOut className="mr-2 h-4 w-4" />
-                    <span className="text-xs">Log out</span>
+                    <span className="text-xs">{dict('Logout')}</span>
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
