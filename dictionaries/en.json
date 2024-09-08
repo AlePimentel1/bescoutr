@@ -81,5 +81,11 @@
         "rememberPassword": "Remember your password?",
         "login": "Login"
       }
+    },
+    "Feed": {
+      "CreatePostCard": {
+        "placeholder": "Share something...",
+        "submit": "Post"
+      }
     }
 }

@@ -81,5 +81,11 @@
       "rememberPassword": "¿Recuerdas tu contraseña?",
       "login": "Iniciar sesión"
   }
-  }
+  },
+  "Feed": {
+      "CreatePostCard": {
+        "placeholder": "Comparte algo...",
+        "submit": "Publicar"
+      }
+    }
 }

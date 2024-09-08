@@ -11,10 +11,10 @@ import {
 export function ReportsCarousel() {
     return (
         <div className="flex justify-center items-center w-full">
-            <Carousel className="w-full max-w-xs">
+            <Carousel className="w-full">
                 <CarouselContent>
-                    {Array.from({ length: 5 }).map((_, index) => (
-                        <CarouselItem key={index}>
+                    {Array.from({ length: 3 }).map((_, index) => (
+                        <CarouselItem key={index} className="max-w-sm basis-1/2">
                             <div className="p-1">
                                 <Card>
                                     <CardContent className="flex aspect-square items-center justify-center p-6">
@@ -25,10 +25,9 @@ export function ReportsCarousel() {
                         </CarouselItem>
                     ))}
                 </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
+                <CarouselPrevious className="left-0" />
+                <CarouselNext className="right-0" />
             </Carousel>
         </div>
-
     )
 }

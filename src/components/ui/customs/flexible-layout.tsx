@@ -10,6 +10,8 @@ interface FlexibleLayoutProps {
     fixedClassName?: string;
     childrenClassName?: string
     withoutSideNav?: boolean;
+    withoutHeader?: boolean;
+    searchRightElement?: React.ReactNode;
 }
 
 const FlexibleLayout: React.FC<FlexibleLayoutProps> = ({
@@ -17,7 +19,9 @@ const FlexibleLayout: React.FC<FlexibleLayoutProps> = ({
     children,
     fixedClassName,
     childrenClassName,
-    withoutSideNav = false
+    withoutSideNav = false,
+    withoutHeader = false,
+    searchRightElement,
 }) => {
     const [totalHeight, setTotalHeight] = useState(0);;
 
@@ -41,11 +45,9 @@ const FlexibleLayout: React.FC<FlexibleLayoutProps> = ({
 
     return (
         <div className="flex h-screen flex-col lg:flex-row">
-            {!withoutSideNav && (
-                <SideNav />
-            )}
+            {!withoutSideNav && <SideNav />}
             <div className="flex-1 flex flex-col h-screen" style={{ height: `calc(100vh - ${totalHeight}px)` }}>
-                <Header />
+                {!withoutHeader && <Header searchRightElement={searchRightElement} />}
                 <div className="flex-1 flex overflow-hidden">
                     <main className={cn("flex-grow col-span-2 overflow-auto px-4 overflow-y-auto", childrenClassName)} style={{ scrollbarWidth: 'none' }}>
                         {children}
