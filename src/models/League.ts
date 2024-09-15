@@ -6,7 +6,7 @@ interface ILeague extends Document {
     type: string;
     logo: string;
     country: string;
-    season: {
+    seasons: {
         year: number;
         start: Date;
         end: Date;
@@ -27,37 +27,37 @@ interface ILeague extends Document {
             predictions: boolean;
             odds: boolean;
         }
-    }
+    }[]
 }
 
 const schema = new Schema<ILeague>({
-    apiId: { type: Number, required: true },
+    apiId: { type: Number },
     name: { type: String, required: true },
     type: { type: String, required: true },
-    logo: { type: String, required: true },
-    country: { type: String, required: true, ref: 'Country' },
-    season: {
+    logo: { type: String },
+    country: { type: String, ref: 'Country' },
+    seasons: [{
         year: { type: Number, required: true },
         start: { type: Date, required: true },
         end: { type: Date, required: true },
-        current: { type: Boolean, required: true },
+        current: { type: Boolean },
         coverage: {
             fixtures: {
-                events: { type: Boolean, required: true },
-                lineups: { type: Boolean, required: true },
-                statistics_fixtures: { type: Boolean, required: true },
-                statistics_players: { type: Boolean, required: true },
+                events: { type: Boolean, default: false },
+                lineups: { type: Boolean, default: false },
+                statistics_fixtures: { type: Boolean, default: false },
+                statistics_players: { type: Boolean, default: false },
             },
-            standings: { type: Boolean, required: true },
-            players: { type: Boolean, required: true },
-            top_scorers: { type: Boolean, required: true },
-            top_assists: { type: Boolean, required: true },
-            top_cards: { type: Boolean, required: true },
-            injuries: { type: Boolean, required: true },
-            predictions: { type: Boolean, required: true },
-            odds: { type: Boolean, required: true },
+            standings: { type: Boolean, default: false },
+            players: { type: Boolean, default: false },
+            top_scorers: { type: Boolean, default: false },
+            top_assists: { type: Boolean, default: false },
+            top_cards: { type: Boolean, default: false },
+            injuries: { type: Boolean, default: false },
+            predictions: { type: Boolean, default: false },
+            odds: { type: Boolean, default: false },
         }
-    }
+    }]
 
 }, { timestamps: true });
 

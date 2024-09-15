@@ -12,9 +12,9 @@ interface ITeam extends Document {
 const schema = new Schema<ITeam>({
     apiId: { type: Number, required: true },
     name: { type: String, required: true },
-    code: { type: String, required: true },
-    country: { type: String, required: true, ref: 'Country' },
-    national: { type: Boolean, required: true },
+    code: { type: String, default: "" },
+    country: { type: String, ref: 'Country' },
+    national: { type: Boolean, required: true, default: false },
     logo: { type: String, required: true }
 }, { timestamps: true });
 
