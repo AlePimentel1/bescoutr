@@ -10,6 +10,7 @@ export default function TableHeaderLoader() {
                 <Skeleton className="w-28 h-6" />
             </span>
             <Skeleton className="w-[10%] h-4" />
+
         </div>
     )
 }
