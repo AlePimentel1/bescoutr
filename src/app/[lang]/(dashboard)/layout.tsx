@@ -1,11 +1,12 @@
 import { Private } from "@/components/session/Private";
 import SessionProvider from "@/components/session/SessionProvider";
+import TanStackProvider from "@/providers/tanstack-provider";
 import { authOptions } from "@/server/auth";
 import "@/styles/globals.css";
 import { getServerSession } from "next-auth";
-import { CSPostHogProvider } from "../../_analytics/provider";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
+import { CSPostHogProvider } from "../../_analytics/provider";
 
 export const metadata = {
     title: "Be Scoutr",
@@ -36,13 +37,16 @@ export default async function RootLayout({
                     boxShadow: '0 0 60px 60px rgba(1,39,87,0.5)',
                     zIndex: -999,
                 }}
+                className="blur-3xl"
             />
             <NextIntlClientProvider messages={messages}>
                 <SessionProvider session={session} baseUrl="/">
                     <CSPostHogProvider>
-                        <Private>
-                            {children}
-                        </Private>
+                        <TanStackProvider>
+                            <Private>
+                                {children}
+                            </Private>
+                        </TanStackProvider>
                     </CSPostHogProvider>
                 </SessionProvider>
             </NextIntlClientProvider>
