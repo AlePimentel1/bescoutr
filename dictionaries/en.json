@@ -1,5 +1,5 @@
 {
-    "HomePage": {
+  "HomePage": {
       "WelcomeText": "Welcome",
       "PlayerOfTheDay": {
         "title": "Player of the day",
@@ -13,8 +13,9 @@
         "title": "Trending players",
         "button": "See more"
       }
-    },
-    "Header": {
+  },
+
+  "Header": {
       "SearchBar": {
         "placeholder": "Search",
         "filterButton": "Add filter",
@@ -39,8 +40,9 @@
         },
         "Logout": "Logout"
       }
-    },
-    "Navigation": {
+  },
+
+  "Navigation": {
       "Home": "Home",
       "Feed": "Feed",
       "Messages": "Messages",
@@ -49,8 +51,9 @@
       "Profile": "My profile",
       "JobBoard": "Job board",
       "CreateReport": "Create new report"
-    },
-    "Auth": {
+  },
+
+  "Auth": {
       "Login": {
         "title": "Sign In",
         "description": "¡Welcome back! Please enter your credentials.",
@@ -81,11 +84,20 @@
         "rememberPassword": "Remember your password?",
         "login": "Login"
       }
-    },
-    "Feed": {
+  },
+
+  "Feed": {
       "CreatePostCard": {
         "placeholder": "Share something...",
         "submit": "Post"
       }
+  },
+
+  "Leagues": {
+    "InfoCard": {
+      "button": "Follow league",
+      "country": "Country",
+      "table": "Standings Table"
     }
+  }
 }

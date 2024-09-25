@@ -7,3 +7,11 @@ export const getLeague = async (id: number) => {
         method: 'GET',
     })
 };
+
+export const getLeaguesGroupedByCountry = async () => {
+    return await fetcher({
+        url: `/api/leagues/grouped`,
+        requiresToken: true,
+        method: 'GET',
+    })
+};

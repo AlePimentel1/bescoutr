@@ -5,7 +5,7 @@ interface ILeague extends Document {
     name: string;
     type: string;
     logo: string;
-    country: string;
+    country: mongoose.Types.ObjectId | null;
     seasons: {
         year: number;
         start: Date;
@@ -35,7 +35,7 @@ const schema = new Schema<ILeague>({
     name: { type: String, required: true },
     type: { type: String, required: true },
     logo: { type: String },
-    country: { type: String, ref: 'Country' },
+    country: { type: mongoose.Types.ObjectId, ref: 'Country', default: null },
     seasons: [{
         year: { type: Number, required: true },
         start: { type: Date, required: true },

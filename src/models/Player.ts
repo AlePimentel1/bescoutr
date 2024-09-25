@@ -9,9 +9,9 @@ interface IPlayer extends Document {
     birth: {
         date: Date;
         place: string;
-        country: string
+        country: mongoose.Types.ObjectId | null;
     };
-    nationality: string;
+    nationality: mongoose.Types.ObjectId | null;
     height: string;
     weight: string;
     injured: boolean;
@@ -27,9 +27,9 @@ const schema = new Schema<IPlayer>({
     birth: {
         date: { type: Date },
         place: { type: String },
-        country: { type: String, ref: 'Country' }
+        country: { type: mongoose.Types.ObjectId, ref: 'Country', default: null },
     },
-    nationality: { type: String, ref: 'Country' },
+    nationality: { type: mongoose.Types.ObjectId, ref: 'Country', default: null },
     height: { type: String },
     weight: { type: String },
     injured: { type: Boolean, default: false },

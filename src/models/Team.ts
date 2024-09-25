@@ -4,7 +4,7 @@ interface ITeam extends Document {
     apiId: number;
     name: string;
     code: string;
-    country: string;
+    country: mongoose.Types.ObjectId | null;
     national: boolean;
     logo: string;
 }
@@ -13,7 +13,7 @@ const schema = new Schema<ITeam>({
     apiId: { type: Number, required: true },
     name: { type: String, required: true },
     code: { type: String, default: "" },
-    country: { type: String, ref: 'Country' },
+    country: { type: mongoose.Types.ObjectId, ref: 'Country', default: null },
     national: { type: Boolean, required: true, default: false },
     logo: { type: String, required: true }
 }, { timestamps: true });

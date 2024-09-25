@@ -1,5 +1,5 @@
 {
-    "HomePage": {
+  "HomePage": {
       "WelcomeText": "Bienvenido",
       "PlayerOfTheDay": {
           "title": "Jugador del día",
@@ -14,6 +14,7 @@
         "button": "Ver más"
     }
   },
+
   "Header": {
     "SearchBar": {
       "placeholder": "Buscar",
@@ -40,6 +41,7 @@
       "Logout": "Cerrar sesión"
     }
   },
+
   "Navigation": {
     "Home": "Inicio",
     "Feed": "Feed",
@@ -50,6 +52,7 @@
     "JobBoard": "Empleos",
     "CreateReport": "Crear reporte"
   },
+  
   "Auth": {
     "Login": {
       "title": "Iniciar sesión",
@@ -62,6 +65,7 @@
       "noAccount": "¿No tienes una cuenta?",
       "register": "Registrarse"
     },
+
     "Register": {
       "title": "Registrarse",
       "description": "¡Bienvenido! Por favor, introduce tus datos para registrarte.",
@@ -74,18 +78,29 @@
       "alreadyHaveAccount": "¿Ya tienes una cuenta?",
       "login": "Iniciar sesión"
     },
+
     "ForgotPassword": {
       "title": "Olvidé mi contraseña",
       "email": "Correo electrónico",
       "sendButton": "Enviar",
       "rememberPassword": "¿Recuerdas tu contraseña?",
       "login": "Iniciar sesión"
-  }
+    }
   },
+
   "Feed": {
       "CreatePostCard": {
         "placeholder": "Comparte algo...",
         "submit": "Publicar"
       }
+  },
+
+  "Leagues": {
+    "InfoCard": {
+      "button": "Seguir liga",
+      "country": "País",
+      "table": "Tabla de Posiciones"
     }
+  }
+
 }

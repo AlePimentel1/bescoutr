@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/popover"
 import { useRouter } from "next/navigation"
 import { useQuery } from "@tanstack/react-query"
+import { getLeaguesGroupedByCountry } from "@/actions/leagues"
 
 const frameworks = [
     {
@@ -49,9 +50,9 @@ export function LeaguesDropdown({ currentLeague }: { currentLeague: number }) {
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState("")
 
-    const { } = useQuery({
+    const { data, isLoading } = useQuery({
         queryKey: ["get-all-leagues"],
-        queryFn: () => getLeagues(),
+        queryFn: () => getLeaguesGroupedByCountry(),
     })
 
 

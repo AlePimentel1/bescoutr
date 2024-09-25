@@ -1,6 +1,6 @@
 'use client'
 import { useTranslations } from "next-intl";
-import PlayerOfTheDayCard from "./player-of-the-day/PlayerOfTheDayCard";
+import PlayerOfTheDayCard from "./player-of-the-day/player-of-the-day-card";
 import WeeklyChallengeCard from "./weekly-challenge/WeeklyChalengeCard";
 import { ReportsCarousel } from "./reports-of-the-week/ReportsCarousel";
 import { useEffect, useState } from "react";

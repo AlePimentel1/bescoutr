@@ -9,5 +9,6 @@ export default getRequestConfig(async ({ locale }) => {
 
     return {
         messages: (await import(`../dictionaries/${locale}.json`)).default,
+        timeZone: 'America/Mexico_City'
     };
 });
