@@ -1,5 +1,6 @@
 import { Toaster } from "@/components/ui/sonner";
 import { brockmann } from "@/lib/fonts";
+import TanStackProvider from "@/providers/tanstack-provider";
 import "@/styles/globals.css";
 import { Metadata } from "next";
 
@@ -37,7 +38,9 @@ export default async function RootLayout({
     <html lang={locale} className={brockmann.className}>
       <body className="relative">
         <main>
-          {children}
+          <TanStackProvider>
+            {children}
+          </TanStackProvider>
         </main>
         <Toaster richColors />
       </body>

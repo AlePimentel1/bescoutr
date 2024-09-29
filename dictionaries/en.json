@@ -63,7 +63,14 @@
         "submit": "Login",
         "divider": "Or",
         "noAccount": "¿Don't have an account?",
-        "register": "Sign up"
+        "register": "Sign up",
+        "errors": {
+          "email": "Email is required",
+          "password": "Password is required",
+          "emailInvalid": "Email is invalid",
+          "title": "An error ocurred",
+          "generic": "Make sure your credentials are correct or the account is active in the system."
+        }
       },
       "Register": {
         "title": "Register",
@@ -75,7 +82,17 @@
         "submit": "Create account",
         "divider": "Or",
         "alreadyHaveAccount": "Already have an account?",
-        "login": "Login"
+        "login": "Login",
+        "errors": {
+          "email": "Email is required",
+          "password": "Password is required",
+          "confirmPassword": "Confirm password is required",
+          "passwordMatch": "Passwords do not match",
+          "passwordLength": "Password must be at least 8 characters long",
+          "emailAlreadyExists": "Email is already registered",
+          "emailInvalid": "Email is invalid",
+          "generic": "An error occurred while registering the user"
+        }
       },
       "ForgotPassword": {
         "title": "Forgot password",

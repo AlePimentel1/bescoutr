@@ -14,7 +14,6 @@ type ResponseData = {
 
 const userSchema = z.object({
     email: z.string().min(1, 'Email is required').email('Invalid email'),
-    username: z.string().min(1, 'Username is required'),
     password: z.string().min(1, 'Password is required').min(8, 'Password must have than 8 characters'),
 });
 
@@ -26,22 +25,16 @@ export async function POST(req: NextRequest) {
         const zBody = userSchema.safeParse(body);
         if (!zBody.success) return NextResponse.json({ message: zBody.error, success: false }, { status: 400 })
 
-        const { email, username, password } = zBody.data;
+        const { email, password } = zBody.data;
 
         const existingUserByEmail = await User.findOne({ email: email })
         if (existingUserByEmail) {
             return NextResponse.json({ message: `User with this email: ${email} already exists`, success: false }, { status: 400 })
         }
 
-        const existingUserByUsername = await User.findOne({ username: username })
-        if (existingUserByUsername) {
-            return NextResponse.json({ message: `User with this username: ${username} already exists`, success: false }, { status: 400 })
-        }
-
         const hashPassword = await hash(password, 10)
 
         const newUser = await new User({
-            username,
             email,
             password: hashPassword,
             accountType: 'fan'

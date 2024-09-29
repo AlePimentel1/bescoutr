@@ -40,11 +40,9 @@ export default async function RootLayout({
             <NextIntlClientProvider messages={messages}>
                 <SessionProvider session={session} baseUrl="/">
                     <CSPostHogProvider>
-                        <TanStackProvider>
-                            <Private>
-                                {children}
-                            </Private>
-                        </TanStackProvider>
+                        <Private>
+                            {children}
+                        </Private>
                     </CSPostHogProvider>
                 </SessionProvider>
             </NextIntlClientProvider>

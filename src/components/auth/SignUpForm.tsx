@@ -1,66 +1,65 @@
 'use client';
-
-import { useForm } from 'react-hook-form';
-import * as z from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-
-import Link from 'next/link';
+import { registerUser } from '@/actions/auth';
+import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { registerUser } from '@/actions/auth';
-import { Toaster } from '@/components/ui/sonner';
-import { toast } from 'sonner';
-import { redirect, useRouter } from 'next/navigation';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
+import { Loader2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import * as z from 'zod';
 
-const FormSchema = z
-    .object({
-        username: z.string().min(1, 'Username is required').max(100),
-        email: z.string().min(1, 'Email is required').email('Invalid email'),
+interface Props {
+    setAccountCreated: (value: boolean) => void;
+}
+
+const SignUpForm = ({ setAccountCreated }: Props) => {
+    const dict = useTranslations('Auth.Register')
+    const FormSchema = z.object({
+        email: z.string().min(1, dict('errors.email')).email(dict('errors.emailInvalid')),
         password: z
             .string()
-            .min(1, 'Password is required')
-            .min(8, 'Password must have than 8 characters'),
-        confirmPassword: z.string().min(1, 'Password confirmation is required'),
+            .min(1, dict('errors.password'))
+            .min(8, dict('errors.passwordLength')),
+        confirmPassword: z.string().min(1, dict('errors.confirmPassword'))
     })
-    .refine((data) => data.password === data.confirmPassword, {
-        path: ['confirmPassword'],
-        message: 'Password do not match',
-    });
-
-
-const SignUpForm = () => {
-    const dict = useTranslations('Auth.Register')
-    const router = useRouter();
+        .refine((data) => data.password === data.confirmPassword, {
+            path: ['confirmPassword'],
+            message: dict('errors.passwordMatch'),
+        });
 
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
-            username: '',
             email: '',
             password: '',
             confirmPassword: '',
         },
     });
 
-    const onSubmit = async (values: z.infer<typeof FormSchema>) => {
-        try {
-
-            const response = await registerUser({
-                username: values.username,
-                email: values.email,
-                password: values.password,
-            })
-
-            if (response.success) {
-                toast.success(response.message)
-                router.push('/login')
+    const { mutate, isPending } = useMutation({
+        mutationFn: (
+            data: {
+                email: string;
+                password: string;
             }
-        } catch (e) {
-            console.log(e)
+        ) => registerUser(data),
+        onSuccess: () => {
+            setAccountCreated(true);
+        },
+        onError: (error) => {
             toast.error('Ocurrió un error al registrar el usuario')
         }
+    })
+
+    const onSubmit = async (values: z.infer<typeof FormSchema>) => {
+        await mutate({
+            email: values.email,
+            password: values.password
+        })
     };
 
     return (
@@ -75,25 +74,10 @@ const SignUpForm = () => {
                         <div className='space-y-4'>
                             <FormField
                                 control={form.control}
-                                name='username'
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel className='text-white font-normal'>{dict('username')}</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder='example_'
-                                                className='bg-white border-none bg-opacity-15 text-white'
-                                                {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
                                 name='email'
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className='text-white font-normal'>{dict('email')}</FormLabel>
+                                        <FormLabel className='text-white font-normal' required>{dict('email')}</FormLabel>
                                         <FormControl>
                                             <Input placeholder='mail@example.com'
                                                 className='bg-white border-none bg-opacity-15 text-white'
@@ -108,7 +92,7 @@ const SignUpForm = () => {
                                 name='password'
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className='text-white font-normal'>{dict('password')}</FormLabel>
+                                        <FormLabel className='text-white font-normal' required>{dict('password')}</FormLabel>
                                         <FormControl>
                                             <Input
                                                 type='password'
@@ -126,7 +110,7 @@ const SignUpForm = () => {
                                 name='confirmPassword'
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className='text-white font-normal'>{dict('confirmPassword')}</FormLabel>
+                                        <FormLabel className='text-white font-normal' required>{dict('confirmPassword')}</FormLabel>
                                         <FormControl>
                                             <Input
                                                 placeholder='********'
@@ -140,8 +124,12 @@ const SignUpForm = () => {
                                 )}
                             />
                         </div>
-                        <Button className='w-full mt-6' type='submit'>
-                            {dict('submit')}
+                        <Button className='w-full mt-6' type='submit' disabled={isPending}>
+                            {
+                                isPending
+                                    ? <Loader2 className='animate-spin' />
+                                    : dict('submit')
+                            }
                         </Button>
                     </form>
                 </Form>

@@ -92,10 +92,10 @@ export const authOptions: NextAuthOptions = {
           await dbConnect();
 
           const existingUser = await User.findOne({ email: credentials?.email });
-          if (!existingUser) throw new Error('User not found');
+          if (!existingUser) throw new Error('User does not exist');
 
           const isValidPassword = await compare(credentials?.password, existingUser.password);
-          if (!isValidPassword) throw new Error('Invalid password');
+          if (!isValidPassword) throw new Error('Credentials are invalid');
 
           if (!existingUser.active) {
             throw new Error('User is not active');
@@ -111,7 +111,6 @@ export const authOptions: NextAuthOptions = {
           return user;
 
         } catch (error) {
-          console.log(error);
           return null;
         }
       }

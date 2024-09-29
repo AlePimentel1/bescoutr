@@ -63,9 +63,15 @@
       "submit": "Iniciar sesión",
       "divider": "O",
       "noAccount": "¿No tienes una cuenta?",
-      "register": "Registrarse"
-    },
-
+      "register": "Registrarse",
+      "errors": {
+        "email": "El correo electrónico es requerido",
+        "password": "La contraseña es requerida",
+        "emailInvalid": "El correo electrónico es inválido",
+        "title": "Ocurrió un error",
+        "generic": "Asegúrate de que tus credenciales sean correctas o la cuenta esté active en el sistema."
+      }
+  },
     "Register": {
       "title": "Registrarse",
       "description": "¡Bienvenido! Por favor, introduce tus datos para registrarte.",
@@ -76,7 +82,17 @@
       "submit": "Crear cuenta",
       "divider": "O",
       "alreadyHaveAccount": "¿Ya tienes una cuenta?",
-      "login": "Iniciar sesión"
+      "login": "Iniciar sesión",
+      "errors": {
+        "email": "El correo electrónico es requerido",
+        "password": "La contraseña es requerida",
+        "confirmPassword": "La confirmación de la contraseña es requerida",
+        "passwordMatch": "Las contraseñas no coinciden",
+        "passwordLength": "La contraseña debe tener al menos 8 caracteres",
+        "emailAlreadyExists": "El correo electrónico ya está registrado",
+        "emailInvalid": "El correo electrónico es inválido",
+        "generic": "Ha ocurrido un error al registrar el usuario"
+      }
     },
 
     "ForgotPassword": {
