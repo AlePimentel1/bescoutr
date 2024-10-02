@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
         const newUser = await new User({
             email,
             password: hashPassword,
-            accountType: 'fan'
+            accountType: 'fan',
         }).save()
 
         const token = await new VerificationToken({

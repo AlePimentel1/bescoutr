@@ -92,6 +92,11 @@
         "emailAlreadyExists": "El correo electrónico ya está registrado",
         "emailInvalid": "El correo electrónico es inválido",
         "generic": "Ha ocurrido un error al registrar el usuario"
+      },
+      "success": {
+        "title": "¡Registro exitoso!",
+        "message": "Tu cuenta ha sido creada exitosamente. Por favor, verifica tu correo electrónico para activar tu cuenta.",
+        "button": "Ir al inicio de sesión"
       }
     },
 
@@ -116,6 +121,23 @@
       "button": "Seguir liga",
       "country": "País",
       "table": "Tabla de Posiciones"
+    }
+  },
+
+  "CompleteProfile": {
+    "Welcome": {
+      "title": "¡Bienvenido a BeScoutr!",
+      "description": "Hoy en día cualquiera puede convertirse en un creador de contenido, pero solo algunos se destacarán por su capacidad de conectar con su audiencia. En este nuevo panorama, surgirán dos tipos de Scouts:"
+    },
+    "AccountTypes": {
+      "scout": {
+        "title": "Scout",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam"
+      },
+      "fan": {
+        "title": "Fan",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam"
+      }
     }
   }
 

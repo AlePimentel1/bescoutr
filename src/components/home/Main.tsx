@@ -10,7 +10,6 @@ export default function Main() {
 
     return (
         <div className="flex flex-col gap-4 pb-6">
-            <p className="text-white">{dict('WelcomeText')} Fulanito</p>
             <PlayerOfTheDayCard />
             <WeeklyChallengeCard />
             <ReportsCarousel />

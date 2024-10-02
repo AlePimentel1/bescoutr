@@ -2,7 +2,12 @@ import {
   getServerSession,
   type DefaultSession,
   type NextAuthOptions,
+  type User as NextAuthUser,
 } from "next-auth";
+
+interface ExtendedUser extends NextAuthUser {
+  isComplete: boolean;
+}
 import DiscordProvider from "next-auth/providers/discord";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
@@ -10,6 +15,7 @@ import { env } from "@/env";
 import User from "@/models/User";
 import { compare } from "bcrypt";
 import dbConnect from "@/lib/mongoDb";
+import { AdapterUser } from "next-auth/adapters";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -25,13 +31,9 @@ declare module "next-auth" {
       email: string;
       name: string;
       profilePicture: string;
+      isComplete: boolean;
     } & DefaultSession["user"];
   }
-
-  // interface User {
-  //   // ...other properties
-  //   // role: UserRole;
-  // }
 }
 
 /**
@@ -54,6 +56,7 @@ export const authOptions: NextAuthOptions = {
           id: user.id,
           email: user.email,
           username: user.username,
+          isComplete: user.isComplete,
         };
       }
       // Si no hay un user, solo devolvemos el token tal cual
@@ -70,6 +73,7 @@ export const authOptions: NextAuthOptions = {
           email: token.email,
           name: token.name,
           profilePicture: token.image,
+          isComplete: token.isComplete,
         },
       };
     },
@@ -105,8 +109,9 @@ export const authOptions: NextAuthOptions = {
             id: existingUser._id.toString(),
             username: existingUser.username,
             email: existingUser.email,
-            name: existingUser.name,
+            name: existingUser.firstName + ' ' + existingUser.lastName,
             image: existingUser.profilePicture,
+            isComplete: existingUser.isComplete,
           };
           return user;
 

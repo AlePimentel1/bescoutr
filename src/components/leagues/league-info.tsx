@@ -30,10 +30,12 @@ const LeagueInfo = ({ league, isLoading }: Props) => {
                         </div>
                         <div className='flex flex-col gap-2'>
                             <p className="text-4xl font-semibold">{league.name}</p>
-                            <div className="flex flex-row items-center gap-2">
-                                <p className='text-md'>{dict('country')}:</p>
-                                <img src={league.flag} alt={league.name} className="w-auto h-4 rounded-sm border" />
-                            </div>
+                            {league.flag &&
+                                <div className="flex flex-row items-center gap-2">
+                                    <p className='text-md'>{dict('country')}:</p>
+                                    <img src={league.flag} alt={league.name} className="w-auto h-4 rounded-sm border" />
+                                </div>
+                            }
                             <Button className="bg-secondary text-white hover:bg-secondary-400 w-fit px-6 rounded-lg">
                                 {dict('button')}
                             </Button>

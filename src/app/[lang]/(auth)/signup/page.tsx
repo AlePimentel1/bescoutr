@@ -1,5 +1,6 @@
 'use client'
-import SignUpForm from "@/components/auth/SignUpForm";
+import AccountCreated from "@/components/auth/signin/account-created";
+import SignUpForm from "@/components/auth/signup/sign-up-form";
 import { useState } from "react";
 
 
@@ -10,7 +11,7 @@ const signUpPage = () => {
             {
                 accountCreated ?
                     (
-                        <div>hola</div>
+                        <AccountCreated />
                     ) :
                     (
                         <SignUpForm setAccountCreated={setAccountCreated} />

@@ -92,6 +92,11 @@
           "emailAlreadyExists": "Email is already registered",
           "emailInvalid": "Email is invalid",
           "generic": "An error occurred while registering the user"
+        },
+        "success": {
+          "title": "Account created",
+          "message": "Your account has been created successfully. Please check your email to verify your account.",
+          "button": "Go to login"
         }
       },
       "ForgotPassword": {
@@ -115,6 +120,23 @@
       "button": "Follow league",
       "country": "Country",
       "table": "Standings Table"
+    }
+  },
+
+  "CompleteProfile": {
+    "Welcome": {
+      "title": "¡Welcome to BeScoutr!",
+      "description": "Nowadays, anyone can become a content creator, but only a few will stand out for their ability to connect with their audience. In this new landscape, two types of Scouts will emerge:"
+    },
+    "AccountTypes": {
+      "scout": {
+        "title": "Scout",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam"
+      },
+      "fan": {
+        "title": "Fan",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam"
+      }
     }
   }
 }

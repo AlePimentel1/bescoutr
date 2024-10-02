@@ -17,11 +17,12 @@ export interface IUser extends Document {
     profilePicture?: string;
     firstName?: string;
     lastName?: string;
+    isComplete?: boolean;
 }
 
 
 export const UserSchema = new mongoose.Schema<IUser>({
-    username: { type: String, required: true, trim: true },
+    username: { type: String, trim: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
     active: { type: Boolean, default: false },
@@ -35,6 +36,7 @@ export const UserSchema = new mongoose.Schema<IUser>({
     profilePicture: { type: String, default: '' },
     firstName: { type: String, default: '' },
     lastName: { type: String, default: '' },
+    isComplete: { type: Boolean, default: false }
 }, { timestamps: true });
 
 UserSchema.index({ email: 1, username: 1 }, { unique: true });

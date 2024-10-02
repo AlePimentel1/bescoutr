@@ -15,7 +15,7 @@ export default function Header({ searchRightElement }: HeaderProps) {
     const { data } = useSession()
     const { user } = data || {}
     return (
-        <div className='flex flex-row justify-between items-center py-4 gap-1' id='mainHeader'>
+        <div className='relative flex flex-row justify-between items-center py-4 gap-1' id='mainHeader'>
             <div className='flex-1 flex flex-row items-center justify-center'>
                 <SearchDialog />
                 {searchRightElement}
@@ -27,7 +27,7 @@ export default function Header({ searchRightElement }: HeaderProps) {
                 <div className='flex flex-row gap-2 items-center'>
                     <Avatar className='border'>
                         <AvatarImage src={user?.image ?? ''} />
-                        <AvatarFallback className='bg-secondary text-white'>{user?.username[0]?.toUpperCase()}</AvatarFallback>
+                        <AvatarFallback className='bg-secondary text-white'>{user?.username?.[0]?.toUpperCase()}</AvatarFallback>
                     </Avatar>
                     <span className='flex flex-col'>
                         <p className='text-white'>{user?.name}</p>

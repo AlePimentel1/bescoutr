@@ -33,7 +33,7 @@ export default function PlayerOfTheDayCard() {
                     <PlayerOfTheDaySkeleton />
                 </div>
             ) : (
-                <Card className="relative flex flex-col w-full bg-secondary border-none h-[300px] bg-[url('/textures/hexagons.png')] bg-center bg-repeat bg-contain">
+                <Card className="relative flex flex-col w-full border-none bg-night-sky-900/80 h-[300px] bg-[url('/textures/hexagons.svg')] bg-center bg-contain">
                     {/* <CardHeader className="flex flex-row relative">
                         <div className="flex flex-row gap-5">
                             <span className="flex items-center justify-center bg-gradient-to-b from-[#243853] to-[#040B15] w-fit py-2 px-4 rounded-lg">
@@ -71,7 +71,7 @@ export default function PlayerOfTheDayCard() {
                     <CardContent className="flex-grow flex flex-row justify-between p-6">
                         <div className="flex flex-col">
                             <div className="flex flex-row gap-5">
-                                <span className="flex items-center justify-center bg-gradient-to-b from-[#243853] to-[#040B15] w-fit py-2 px-4 rounded-lg">
+                                <span className="flex items-center justify-center bg-gradient-to-b from-secondary to-secondary-900 w-fit py-2 px-4 rounded-lg">
                                     <p className="tracking-wide text-white">{dict('title')}</p>
                                 </span>
                                 <div className="flex flex-row gap-2">
@@ -96,7 +96,7 @@ export default function PlayerOfTheDayCard() {
                         </div>
                         <div className="flex flex-row gap-2 justify-center">
                             {/* <span className=" flex items-center justify-center w-full rounded-full"> */}
-                            <img src={playerOfTheDay.photo} alt="Player photo" className="w-auto h-36 border-2 border-secondary shadow-sm rounded-full" />
+                            <img src={playerOfTheDay.photo} alt="Player photo" className="w-auto h-36 border-2 border-primary shadow-sm rounded-full" />
                             {/* </span> */}
                         </div>
 
