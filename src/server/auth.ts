@@ -4,10 +4,6 @@ import {
   type NextAuthOptions,
   type User as NextAuthUser,
 } from "next-auth";
-
-interface ExtendedUser extends NextAuthUser {
-  isComplete: boolean;
-}
 import DiscordProvider from "next-auth/providers/discord";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
@@ -16,6 +12,8 @@ import User from "@/models/User";
 import { compare } from "bcrypt";
 import dbConnect from "@/lib/mongoDb";
 import { AdapterUser } from "next-auth/adapters";
+import { JWT } from "next-auth/jwt";
+import { DefaultJWT } from "next-auth/jwt";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -24,15 +22,35 @@ import { AdapterUser } from "next-auth/adapters";
  * @see https://next-auth.js.org/getting-started/typescript#module-augmentation
  */
 declare module "next-auth" {
+  interface User {
+    id: string;
+    username: string;
+    email: string;
+    name: string;
+    image: string;
+    isComplete: boolean;
+  }
+
   interface Session extends DefaultSession {
     user: {
       id: string;
       username: string;
       email: string;
+      image: string;
       name: string;
-      profilePicture: string;
       isComplete: boolean;
     } & DefaultSession["user"];
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    id: string;
+    username: string;
+    email: string;
+    name: string;
+    image: string;
+    isComplete: boolean;
   }
 }
 
@@ -48,7 +66,7 @@ export const authOptions: NextAuthOptions = {
     signOut: '/signout',
   },
   callbacks: {
-    async jwt({ token, user, account, profile }) {
+    async jwt({ token, user }) {
       // Si hay un user, significa que estamos iniciando sesión, así que añadimos sus datos al token
       if (user) {
         return {
@@ -110,7 +128,7 @@ export const authOptions: NextAuthOptions = {
             username: existingUser.username,
             email: existingUser.email,
             name: existingUser.firstName + ' ' + existingUser.lastName,
-            image: existingUser.profilePicture,
+            image: existingUser.profilePicture || '',
             isComplete: existingUser.isComplete,
           };
           return user;

@@ -95,9 +95,7 @@ export default function PlayerOfTheDayCard() {
                             <Button>{dict('button')}</Button>
                         </div>
                         <div className="flex flex-row gap-2 justify-center">
-                            {/* <span className=" flex items-center justify-center w-full rounded-full"> */}
                             <img src={playerOfTheDay.photo} alt="Player photo" className="w-auto h-36 border-2 border-primary shadow-sm rounded-full" />
-                            {/* </span> */}
                         </div>
 
                     </CardContent>

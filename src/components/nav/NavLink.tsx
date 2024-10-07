@@ -13,6 +13,7 @@ export default function NavLink({
     slug,
     isCollapsedMenu = false,
     currentSlug,
+    icon,
 }: any) {
     const isSelect = (slug && currentSlug && slug === currentSlug) || isSelected
     return (
@@ -41,8 +42,11 @@ export default function NavLink({
                 style={{ textDecoration: "none" }}
                 onClick={onAction}
             >
-                <div className={`${isCollapsedMenu ? 'lg:justify-center' : ''} flex items-center  w-full h-full gap-2`}>
-                    <span className={`flex ${!isCollapsedMenu ? 'flex' : 'lg:hidden'} ${isSelect ? 'text-white' : 'text-neutral-500'} items-center text-[14px] gap-1 font-medium`}>
+                <div className={`${isCollapsedMenu ? 'lg:justify-center' : ''} flex items-center w-full h-full gap-2`}>
+                    <span className={`${isSelect && isCollapsedMenu ? 'text-white' : 'text-neutral-500'} ${isCollapsedMenu ? 'hover:text-white' : ''} `}>
+                        {icon}
+                    </span>
+                    <span className={`flex ${!isCollapsedMenu ? '' : 'lg:hidden'} ${isSelect ? 'text-white' : 'text-neutral-500'} items-center text-[14px] gap-1 font-medium`}>
                         {label}
                     </span>
                 </div>

@@ -10,6 +10,7 @@ import {
 import { SideBarTooltip } from "./NavLink"
 import { useRouter } from "next/navigation"
 import { TooltipProvider } from "../ui/tooltip"
+import { useMenuStore } from "@/store/menu"
 
 interface NavItemProps {
     label: string
@@ -38,22 +39,21 @@ export default function NavItem({
     isMenuCollapsed = false,
 }: NavItemProps) {
     const router = useRouter()
-    // const { handleChangeValue } = useMenu()
+    const { openItems, toggleItem } = useMenuStore()
 
-    // useEffect(() => {
-    //     if (contentSlugs?.includes(slug) && !open.includes(value)) {
-    //         const newValue = [...open]
-    //         newValue.push(value)
-    //         handleChangeValue(newValue)
-    //     }
-    // }, [isCollapsedMenu, slug, value])
+    const handleToggle = () => {
+        toggleItem(value); // Alternar el estado del item
+        const newOpenItems = Array.from(openItems);
+        localStorage.setItem('MENU_CONTROL', JSON.stringify({ collapsed: isMenuCollapsed, openItems: newOpenItems }));
+    };
 
-    return <AccordionItem
-        value={value}
-        className={`border-none m-0 pb-0 w-full ${isMenuCollapsed ? `lg:border-b ${open?.includes(value) && isAccordion ? 'lg:bg-gray-100 lg:rounded-b-[4px] lg:rounded-t-[4px]' : 'duration-500'} ` : ""} `}
-    >
-        <div className={`flex`}>
-            <TooltipProvider>
+
+    return <TooltipProvider>
+        <AccordionItem
+            value={value}
+            className={`border-none m-0 pb-0 w-full ${isMenuCollapsed ? `lg:border-b ${Array.from(openItems)?.includes(value) && isAccordion ? 'lg:bg-gray-100/5 lg:rounded-b-[4px] lg:rounded-t-[4px]' : 'duration-500'} ` : ""} `}
+        >
+            <div className={`flex`}>
                 <SideBarTooltip content={toolTipContent || label} active={isMenuCollapsed}>
                     <div className={`relative w-full items-center group flex ${isMenuCollapsed ? 'lg:w-[42px] h-[38px]' : 'gap-2'}`}>
                         {
@@ -105,7 +105,13 @@ export default function NavItem({
                         </Link>
                     </div>
                 </SideBarTooltip >
-            </TooltipProvider >
-        </div >
-    </AccordionItem >
+            </div >
+            <AccordionContent
+                className={`border-none ${isAccordion ? '' : 'lg:hidden'}`}>
+                <div className={`flex-col flex ${isMenuCollapsed ? 'w-[42px] relative lg:rounded-b-[4px]' : ''} gap-[2px]  mt-[2px] `}>
+                    {children}
+                </div>
+            </AccordionContent>
+        </AccordionItem >
+    </TooltipProvider >
 }

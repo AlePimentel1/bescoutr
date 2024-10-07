@@ -8,6 +8,7 @@ interface MainMenuChildrens {
     onAction?: any;
     isSelected?: boolean;
     slug: string;
+    icon?: React.ReactNode;
 }
 
 interface MainMenuItems {
@@ -85,21 +86,25 @@ export const mainMenuItems: MainMenuItems[] = [
                 label: "My reports",
                 href: "/my-reports",
                 slug: "/my-reports",
+                icon: <Award size={24} />
             },
             {
                 label: "My rankings",
                 href: "/my-rankings",
                 slug: "/my-rankings",
+                icon: <Award size={24} />
             },
             {
                 label: "Scouting map",
                 href: "/scouting-map",
                 slug: "/scouting-map",
+                icon: <Award size={24} />
             },
             {
                 label: "Watchlist",
                 href: "/watchlist",
                 slug: "/watchlist",
+                icon: <Award size={24} />
             }
         ]
     }

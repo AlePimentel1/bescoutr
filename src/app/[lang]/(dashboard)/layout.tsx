@@ -1,6 +1,5 @@
 import { Private } from "@/components/session/Private";
 import SessionProvider from "@/components/session/SessionProvider";
-import TanStackProvider from "@/providers/tanstack-provider";
 import { authOptions } from "@/server/auth";
 import "@/styles/globals.css";
 import { getServerSession } from "next-auth";

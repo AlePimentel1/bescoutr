@@ -1,48 +1,34 @@
 'use client'
+
 import usePathnameWithoutIntl from "@/hooks/usePathnameWithoutIntl"
 import { cn } from "@/lib/utils"
-import { Menu, PanelRightOpen } from "lucide-react"
+import { Menu, PanelLeftOpen, PanelRightOpen } from "lucide-react"
 import Link from "next/link"
-import { useEffect, useState } from "react"
 import NavBar from "../nav/NavBar"
 import Header from '@/components/header/Header';
 import { Button } from '@/components/ui/button';
+import { useMenuStore } from "@/store/menu"
 
-interface SideNavProps {
-    isCollapsed?: boolean
-    openMenu?: boolean
-}
-
-const SideNav = ({ openMenu = false }: SideNavProps) => {
-    const [isCollapsed, setIsCollapsed] = useState(false);
-    const slug = usePathnameWithoutIntl()
-
-    const handleMenuToggle = () => {
-        const newState = !isCollapsed;
-        setIsCollapsed(newState);
-        localStorage.setItem('sideNavOpen', newState.toString()); // Guardar el nuevo estado en localStorage
-    };
-
-    useEffect(() => {
-        const savedState = localStorage.getItem('sideNavOpen');
-        setIsCollapsed(savedState ? savedState === 'true' : false);
-    }, []);
-
+const SideNav = () => {
+    const { isCollapsed, isOpen, toggleCollapse, toggleOpen } = useMenuStore();
+    // const isOpen = useMenuStore(state => state.isOpen);
+    // const toggleOpen = useMenuStore(state => state.toggleOpen);
+    // const isCollapsed = useMenuStore(state => state.isCollapsed);
+    // const toggleCollapse = useMenuStore(state => state.toggleCollapse);
+    const slug = usePathnameWithoutIntl();
 
     return (
         <div className="flex flex-col">
-            {/* THIS IS THE HEADER ON MOBILE */}
+            {/* HEADER ON MOBILE */}
             <header id="mobile-nav"
                 className={cn("w-full flex lg:hidden items-center h-[50px] text-white bg-white bg-opacity-5 justify-between px-5 shrink-0")}
             >
-                <Menu />
+                <Menu onClick={toggleOpen} />
             </header>
-            {/* THIS IS THE HEADER ON LAPTOP */}
-            <main className={`duration-75 hidden lg:flex lg:flex-grow lg:overflow-y-auto relative`}
-            // style={{
-            //     paddingLeft: isMobile ? '0px' : isCollapsed ? !!isSubMenuActive ? !isMobile ? `calc(68px + ${paddingToUse}px)` : '0px' : '68px' : !!isSubMenuActive && !isMobile ? `calc(68px + ${paddingToUse}px)` : '210px'
-            // }}
-            >
+
+            {/* HEADER ON LAPTOP */}
+            <main className={`duration-75 hidden lg:flex lg:flex-grow lg:overflow-y-auto relative`}>
+                {/* Radial Gradient */}
                 <span
                     className="w-[75%] h-10 -top-[30px] bg-caribbean-green-500"
                     style={{
@@ -55,11 +41,14 @@ const SideNav = ({ openMenu = false }: SideNavProps) => {
                         zIndex: -999,
                     }}
                 />
-                <div className={`flex w-max lg:left-0 ${openMenu ? "left-0" : "-left-full"} duration-300 ease-in-out bg-white bg-opacity-5 h-[100vh]`}>
+
+                {/* SIDEBAR */}
+                <div className={`flex w-max lg:left-0 ${isOpen ? "left-0" : "-left-full"} duration-300 ease-in-out bg-white bg-opacity-5 h-[100vh]`}>
                     <div className={`w-full`}>
-                        <aside className={`flex flex-col lg:left-0  h-[100vh] overflow-y-auto`}>
-                            <div className={`w-[260px] ${isCollapsed ? "lg:w-[68px] flex flex-col items-center" : "lg:w-[260px] px-4"
-                                } h-full shrink-0 relative duration-300 bg-transparent ease-out items-center`}>
+                        <aside className={`flex flex-col lg:left-0 h-[100vh] overflow-y-auto`}>
+                            <div className={`w-[260px] ${isCollapsed ? "lg:w-[68px] flex flex-col items-center" : "lg:w-[260px] px-4"} h-full shrink-0 relative duration-300 bg-transparent ease-out items-center`}>
+
+                                {/* LOGO */}
                                 <div className="flex flex-col shrink-0 w-full">
                                     <Link href={'/'} className="my-8">
                                         <div className="flex h-fit justify-center items-center">
@@ -76,17 +65,21 @@ const SideNav = ({ openMenu = false }: SideNavProps) => {
                                         </div>
                                     </Link>
                                 </div>
-                                {/* BUTTON TO CLOSE THE MENU */}
+
+                                {/* BUTTON TO COLLAPSE/EXPAND THE MENU */}
                                 <Button
-                                    onClick={() => handleMenuToggle()}
+                                    onClick={toggleCollapse}
                                     variant={'ghost'}
-                                    className={`absolute ${isCollapsed ? 'lg:hidden' : 'right-2 top-2 lg:flex hidden '} z-[11] hover:bg-transparent p-0 h-fit w-fit`}>
-                                    <PanelRightOpen size={20} className="text-neutral-500" />
+                                    className={`absolute right-1 top-2 lg:flex hidden z-[11] hover:bg-transparent p-0 h-fit w-fit`}>
+                                    {isCollapsed ?
+                                        <PanelLeftOpen size={20} className="text-neutral-500 hover:text-neutral-300" />
+                                        : <PanelRightOpen size={20} className="text-neutral-500 hover:text-neutral-300" />
+                                    }
                                 </Button>
+
                                 {/* NAVIGATION BAR */}
                                 <NavBar
                                     slug={slug}
-                                    handleOpenMenu={handleMenuToggle}
                                     isMenuCollapsed={isCollapsed}
                                 />
                             </div>
@@ -95,7 +88,7 @@ const SideNav = ({ openMenu = false }: SideNavProps) => {
                 </div>
             </main>
         </div>
-    )
+    );
 }
 
-export default SideNav
+export default SideNav;

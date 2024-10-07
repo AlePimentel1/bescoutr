@@ -125,20 +125,55 @@
   },
 
   "CompleteProfile": {
+    "next": "Continuar",
+    "prev": "Atrás",
+    "submit": "Crear cuenta",
     "Welcome": {
       "title": "¡Bienvenido a BeScoutr!",
+      "subtitle": "Selecciona el tipo de cuenta",
       "description": "Hoy en día cualquiera puede convertirse en un creador de contenido, pero solo algunos se destacarán por su capacidad de conectar con su audiencia. En este nuevo panorama, surgirán dos tipos de Scouts:"
     },
     "AccountTypes": {
       "scout": {
-        "title": "Scout",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam"
       },
       "fan": {
-        "title": "Fan",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam"
       }
+    },
+    "BasicInfo": {
+      "title": "Información básica",
+      "description": "Por favor, completa la siguiente información para completar tu perfil.",
+      "firstName": "Nombre",
+      "firstNamePlaceholder": "Ingresa tu nombre...",
+      "lastName": "Apellido",
+      "lastNamePlaceholder": "Ingresa tu apellido...",
+      "username": "Nombre de usuario",
+      "usernamePlaceholder": "Ingresa tu nombre de usuario...",
+      "country": "País",
+      "countryPlaceholder": "Selecciona tu país..."
+    },
+    "Favourites": {
+      "Leagues": {
+        "tab": "Ligas",
+        "title": "Elige tus ligas favoritas",
+        "description": "Selecciona las ligas que deseas seguir."
+      },
+      "Teams": {
+        "tab": "Equipos",
+        "title": "Elige tus equipos favoritos",
+        "description": "Selecciona los equipos que deseas seguir."
+      },
+      "Players": {
+        "tab": "Jugadores",
+        "title": "Elige tus jugadores favoritos",
+        "description": "Selecciona los jugadores que deseas seguir."
+      },
+      "Scouts": {
+        "tab": "Scouts",
+        "title": "Elige tus scouts favoritos",
+        "description": "Selecciona los scouts que deseas seguir."
     }
+  } 
   }
-
 }

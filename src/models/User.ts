@@ -17,7 +17,7 @@ export interface IUser extends Document {
     profilePicture?: string;
     firstName?: string;
     lastName?: string;
-    isComplete?: boolean;
+    isComplete: boolean;
 }
 
 
