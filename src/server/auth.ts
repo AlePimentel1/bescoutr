@@ -21,38 +21,6 @@ import { DefaultJWT } from "next-auth/jwt";
  *
  * @see https://next-auth.js.org/getting-started/typescript#module-augmentation
  */
-declare module "next-auth" {
-  interface User {
-    id: string;
-    username: string;
-    email: string;
-    name: string;
-    image: string;
-    isComplete: boolean;
-  }
-
-  interface Session extends DefaultSession {
-    user: {
-      id: string;
-      username: string;
-      email: string;
-      image: string;
-      name: string;
-      isComplete: boolean;
-    } & DefaultSession["user"];
-  }
-}
-
-declare module "next-auth/jwt" {
-  interface JWT {
-    id: string;
-    username: string;
-    email: string;
-    name: string;
-    image: string;
-    isComplete: boolean;
-  }
-}
 
 /**
  * Options for NextAuth.js used to configure adapters, providers, callbacks, etc.

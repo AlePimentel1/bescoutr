@@ -76,7 +76,7 @@ export default function Favourites({ form, prevStep }: Props) {
     ]
 
     return (
-        <div className="grid grid-cols-2 items-center gap-4 lg:gap-8">
+        <div className="grid grid-cols-2 items-start gap-4 lg:gap-8 h-full">
             <div>
                 <div className='flex flex-col items-center'>
                     <h1 className="text-white text-xl md:text-3xl lg:text-4xl">
@@ -187,13 +187,13 @@ export default function Favourites({ form, prevStep }: Props) {
                 </div>
 
             </div>
-            <div>
+            <div className='flex flex-col gap-4 h-full'>
                 <div className='flex flex-col items-center'>
                     <h1 className="text-white text-xl md:text-3xl lg:text-4xl">{dict('BasicInfo.title')}</h1>
                     <h1 className="text-gray-400 text-sm md:text-md lg:text-lg">{dict('BasicInfo.description')}</h1>
                 </div>
-                <div className='grid grid-cols-2 w-full gap-4'>
-
+                <div className='flex w-full h-full'>
+                    {favouriteSteps[favouriteStep - 1]}
                 </div>
 
                 <div className='flex flex-row gap-8 w-full justify-between'>

@@ -1,8 +1,10 @@
+import { env } from "@/env";
 import dbConnect from "@/lib/mongoDb";
 import { getToken } from "next-auth/jwt";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
+import { SafeNextRequest } from "types/api";
 
-export async function safeApiMiddleware(req: NextRequest) {
+export async function safeApiMiddleware(req: SafeNextRequest) {
     try {
         await dbConnect();
     } catch (error) {
@@ -12,13 +14,14 @@ export async function safeApiMiddleware(req: NextRequest) {
         );
     }
 
-    const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+    const token = await getToken({ req, secret: env.NEXTAUTH_SECRET });
     if (!token) {
         return NextResponse.json(
             { message: "UNAUTHORIZED", success: false },
             { status: 401 }
         );
     }
+    req.user = token;
 
     return NextResponse.next();
 }
