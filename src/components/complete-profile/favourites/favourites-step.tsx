@@ -1,23 +1,7 @@
-import { useTranslations } from 'next-intl';
-import { CompleteProfileFormType } from '../utils/constants';
-import { FormField, FormItem, FormControl, FormDescription, FormMessage, FormLabel } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectLabel,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
-import countries from '@/data/countries.json'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { cn } from '@/lib/utils';
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
-import { Check, ChevronsUpDown } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
+import { CompleteProfileFormType } from '../utils/constants';
 import SelectLeagues from './select-leagues';
 
 interface Props {
@@ -69,7 +53,7 @@ export default function Favourites({ form, prevStep }: Props) {
     }
 
     const favouriteSteps = [
-        <SelectLeagues />
+        <SelectLeagues form={form} />,
         // <SelectTeams />,
         // <SelectPlayers />,
         // <SelectScouts />
@@ -188,10 +172,6 @@ export default function Favourites({ form, prevStep }: Props) {
 
             </div>
             <div className='flex flex-col gap-4 h-full'>
-                <div className='flex flex-col items-center'>
-                    <h1 className="text-white text-xl md:text-3xl lg:text-4xl">{dict('BasicInfo.title')}</h1>
-                    <h1 className="text-gray-400 text-sm md:text-md lg:text-lg">{dict('BasicInfo.description')}</h1>
-                </div>
                 <div className='flex w-full h-full'>
                     {favouriteSteps[favouriteStep - 1]}
                 </div>

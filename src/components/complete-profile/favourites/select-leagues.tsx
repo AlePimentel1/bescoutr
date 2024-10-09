@@ -2,8 +2,13 @@ import { getLeagues } from "@/actions/complete-profile";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import SelectLayout from "./select-layout";
+import { CompleteProfileFormType } from "../utils/constants";
 
-const SelectLeagues = () => {
+interface Props {
+    form: CompleteProfileFormType
+}
+
+const SelectLeagues = ({ form }: Props) => {
     const [currentLeagues, setCurrentLeagues] = useState<{ id: number, title: string, image: string }[]>([])
 
     const { data, isLoading, isPending, error } = useQuery({
@@ -41,6 +46,8 @@ const SelectLeagues = () => {
                 title: 'Favourites'
             }]}
             isLoading={isLoading || isPending}
+            form={form}
+            fieldName="favouriteLeagues"
         />
     )
 }

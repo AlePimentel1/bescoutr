@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button"
+import { FormControl, FormField, FormItem } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Search } from "lucide-react"
+import { CompleteProfileFieldNames, CompleteProfileFormType } from "../utils/constants"
+import { useFieldArray } from "react-hook-form"
 
 interface Props {
     searchPlaceHolder: string
@@ -11,6 +14,8 @@ interface Props {
     tabs: { id: string, title: string }[]
     onSelectTab: (tabId: string) => void
     isLoading: boolean
+    form: CompleteProfileFormType
+    fieldName: CompleteProfileFieldNames
 }
 
 const SelectLayout = ({
@@ -20,8 +25,21 @@ const SelectLayout = ({
     onSelectCard,
     tabs,
     onSelectTab,
-    isLoading
+    isLoading,
+    form,
+    fieldName
 }: Props) => {
+
+    const toggleSelection = (id: number) => {
+        const field = form.getValues()[fieldName]
+        const set = new Set(field)
+        if (set.has(String(id))) {
+            set.delete(String(id))
+        } else {
+            set.add(String(id))
+        }
+        form.setValue(fieldName, Array.from(set))
+    }
     return (
         <>
             {isLoading ? (
@@ -54,14 +72,29 @@ const SelectLayout = ({
                             <Button className="text-white rounded-full" variant={'outline'} type="button" key={index} onClick={() => onSelectTab(tab.id)}>{tab.title}</Button>
                         ))}
                     </div>
-                    <div className="grid grid-cols-4 gap-4 w-full">
-                        {cards.map((card, index) => (
-                            <div className="flex flex-col gap-2 p-1 items-center justify-center border rounded-lg w-full h-full bg-white/50 cursor-pointer" key={index} onClick={() => onSelectCard(card.id)}>
-                                <img src={card.image} alt={card.title} className="h-14 w-auto" />
-                                <p className="text-white text-sm text-center break-words max-w-full">{card.title}</p>
-                            </div>
-                        ))}
-                    </div>
+                    <FormField
+                        key={fieldName}
+                        control={form.control}
+                        name={fieldName}
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormControl>
+                                    <div className="grid grid-cols-4 gap-4 w-full">
+                                        {cards.map((card, index) => (
+                                            <div
+                                                key={card.id + index}
+                                                className={`flex flex-col gap-2 p-1 items-center justify-center rounded-lg w-full h-full cursor-pointer border-2 bg-white/50 ${field.value.find(field => String(field) === String(card.id)) ? 'border-primary bg-primary/50' : ''}`}
+                                                onClick={() => toggleSelection(card.id)}
+                                            >
+                                                <img src={card.image} alt={card.title} className="h-14 w-auto" />
+                                                <p className="text-white text-sm text-center break-words max-w-full">{card.title}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </FormControl>
+                            </FormItem>
+                        )}
+                    />
                 </div >
             )}
         </>

@@ -25,3 +25,8 @@ export const completeProfileDefaultValues: CompleteProfileSchemaType = {
 }
 export type CompleteProfileSchemaType = z.infer<typeof completeProfileSchema>
 export type CompleteProfileFormType = UseFormReturn<z.infer<typeof completeProfileSchema>>
+export type CompleteProfileFieldNames = ArrayFieldsOnly<CompleteProfileSchemaType>
+export type ArrayFieldsOnly<T> = {
+    [K in keyof T]: T[K] extends Array<any> ? K : never;
+}[keyof T];
+
