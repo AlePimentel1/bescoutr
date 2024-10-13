@@ -36,6 +36,7 @@ export default function LeaguesTable() {
         queryKey: ["league", selectedLeague],
         queryFn: () => getLeague(selectedLeague),
         enabled: !!selectedLeague,
+        staleTime: 1000 * 60 * 10
     });
 
     return (
@@ -48,21 +49,11 @@ export default function LeaguesTable() {
                     isLoading={isLoading}
                 />
                 <div className="flex flex-col justify-between items-center bg-white/5 rounded-xl px-4">
-                    {/* <div className="flex flex-row justify-between items-center w-full py-4"> */}
-                    {/* {isLoading ? (
-                            <TableHeaderLoader />
-                        ) : data.league ? (
-                            <>
-                                <LeaguesDropdown currentLeague={selectedLeague} />
-                                <p>{`Temporada ${data.league.season}`}</p>
-                            </>
-                        ) : null} */}
                     <LeagueItems
                         isLoading={isLoading}
                         season={data?.league?.season}
                         selectedLeague={selectedLeague}
                     />
-                    {/* </div> */}
                     <Table className="rounded-xl">
                         <TableHeader >
                             <TableRow className="bg-white/20 hover:bg-white/20 border-b-transparent">
@@ -87,7 +78,7 @@ export default function LeaguesTable() {
                                         <img
                                             src={teamData.team.logo}
                                             alt={teamData.team.name}
-                                            className="w-6 h-6 mr-2 object-contain" // Ajusta el tamaño y usa `object-contain` para mantener la imagen en su proporción
+                                            className="w-6 h-6 mr-2 object-contain"
                                         />
                                         <span>{teamData.team.name}</span>
                                     </TableCell>

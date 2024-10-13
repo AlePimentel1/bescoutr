@@ -1,13 +1,14 @@
 import { env } from "@/env";
+import rateLimiter from "@/lib/rateLimiter";
 import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
 import { safeApiMiddleware } from "../middlewares/safeApi";
 
-const chatMessageSchema = z.object({
-    message: z.string().min(1).max(1000),
-});
-
 export async function GET(req: NextRequest) {
+    const rateLimit = await rateLimiter(req);
+    if (!rateLimit) {
+        return NextResponse.json({ message: "RATE_LIMIT_EXCEEDED", success: false }, { status: 429 });
+    }
+
     try {
         const safeAuth = await safeApiMiddleware(req);
         if (safeAuth.status !== 200) return safeAuth;

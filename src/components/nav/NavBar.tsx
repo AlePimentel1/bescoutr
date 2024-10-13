@@ -1,13 +1,11 @@
-import { useRouter } from "next/router"
-import { Accordion } from "../ui/accordion"
-import NavItem from "./NavItem";
-import { mainMenuItems } from "../side-nav/constants/main-items";
-import NavLink from "./NavLink";
-import CreateReportButton from "../side-nav/CreateReportButton";
-import { Briefcase, Menu } from "lucide-react";
-import { Button } from '@/components/ui/button';
-import { useEffect } from "react";
 import { useMenuStore } from "@/store/menu";
+import { Briefcase } from "lucide-react";
+import { useEffect } from "react";
+import { mainMenuItems } from '../side-nav/constants/main-items';
+import CreateReportButton from "../side-nav/CreateReportButton";
+import { Accordion } from "../ui/accordion";
+import NavItem from "./NavItem";
+import NavLink from "./NavLink";
 
 interface NavBarProps {
     slug: string

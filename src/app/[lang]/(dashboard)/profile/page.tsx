@@ -1,4 +1,4 @@
-import ProfileBasicInfo from "@/components/profile/ProfileBasicInfo";
+import ProfileBasicInfo from "@/components/dashboard/profile/ProfileBasicInfo";
 import FlexibleLayout from "@/components/ui/customs/flexible-layout";
 
 export default function ProfilePage() {

@@ -9,6 +9,7 @@ export default function HomePage() {
         <News />
       }
       fixedClassName="bg-white bg-opacity-5 px-4 py-2 w-[350px] hidden lg:block"
+      childrenClassName="px-4"
     >
       <Main />
     </FlexibleLayout>

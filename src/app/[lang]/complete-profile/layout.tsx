@@ -1,16 +1,27 @@
+import SessionProvider from "@/components/session/SessionProvider";
+import { authOptions } from "@/server/auth";
 import "@/styles/globals.css";
+import { getServerSession } from "next-auth";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
+import { CSPostHogProvider } from "../../_analytics/provider";
+
+export const metadata = {
+    title: "Be Scoutr",
+    description: "Somos una plataforma que impulsa a los scoutrs a alcanzar sus metas y sueños.",
+    icons: [{ rel: "icon", url: "/favicon.webp" }],
+};
 
 export default async function RootLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
+    const session = await getServerSession(authOptions)
     const messages = await getMessages()
+
     return (
         <>
-            {/* SVG Background */}
             <div
                 className="absolute inset-0 opacity-50"
                 style={{
@@ -44,7 +55,11 @@ export default async function RootLayout({
                 }}
             />
             <NextIntlClientProvider messages={messages}>
-                {children}
+                <SessionProvider session={session} baseUrl="/">
+                    <CSPostHogProvider>
+                        {children}
+                    </CSPostHogProvider>
+                </SessionProvider>
             </NextIntlClientProvider>
         </>
     );

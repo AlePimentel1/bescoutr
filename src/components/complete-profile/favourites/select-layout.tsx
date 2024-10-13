@@ -83,7 +83,7 @@ const SelectLayout = ({
                                         {cards.map((card, index) => (
                                             <div
                                                 key={card.id + index}
-                                                className={`flex flex-col gap-2 p-1 items-center justify-center rounded-lg w-full h-full cursor-pointer border-2 bg-white/50 ${field.value.find(field => String(field) === String(card.id)) ? 'border-primary bg-primary/50' : ''}`}
+                                                className={`flex flex-col gap-2 p-1 items-center justify-center rounded-lg w-full h-full cursor-pointer border-2 ${field.value.find(field => String(field) === String(card.id)) ? 'border-primary bg-primary/50' : 'bg-white/40'}`}
                                                 onClick={() => toggleSelection(card.id)}
                                             >
                                                 <img src={card.image} alt={card.title} className="h-14 w-auto" />

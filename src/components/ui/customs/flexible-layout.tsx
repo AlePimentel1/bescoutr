@@ -49,7 +49,7 @@ const FlexibleLayout: React.FC<FlexibleLayoutProps> = ({
             <div className="flex-1 flex flex-col h-screen" style={{ height: `calc(100vh - ${totalHeight}px)` }}>
                 {!withoutHeader && <Header searchRightElement={searchRightElement} />}
                 <div className="flex-1 flex overflow-hidden">
-                    <main className={cn("flex-grow col-span-2 overflow-auto px-4 overflow-y-auto", childrenClassName)} style={{ scrollbarWidth: 'none' }}>
+                    <main className={cn("flex-grow col-span-2 overflow-auto overflow-y-auto", childrenClassName)} style={{ scrollbarWidth: 'none' }}>
                         {children}
                     </main>
                     {fixedContent && (
