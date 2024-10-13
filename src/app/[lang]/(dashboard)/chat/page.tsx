@@ -1,4 +1,6 @@
 'use client'
+import ChatLayout from "@/components/chat/chat-layout/chat-layout";
+import ChatsList from "@/components/chat/chats-list/chats-list";
 import FlexibleLayout from "@/components/ui/customs/flexible-layout";
 import { useSearchParams } from "next/navigation";
 
@@ -8,9 +10,9 @@ export default function MessagesPage() {
 
     return (
         <FlexibleLayout
-            childrenClassName="flex h-full gap-8">
-            <h1 className="text-white w-fit">Messages</h1>
-            <h2 className="text-white w-full">{chatId ?? 'NO HAY CHAY ABIERTO'}</h2>
+            childrenClassName="flex h-full">
+            <ChatsList />
+            <ChatLayout />
         </FlexibleLayout>
     );
 }

@@ -1,6 +1,6 @@
-import mongoose, { Document, Model, Schema } from "mongoose";
+import mongoose, { Model, Schema } from "mongoose";
 
-interface IPlayer extends Document {
+interface IPlayer {
     apiId: number;
     name: string;
     firstName: string;

@@ -1,6 +1,6 @@
-import mongoose, { Document, Model, Schema } from "mongoose";
+import mongoose, { Model, Schema } from "mongoose";
 
-interface ITeam extends Document {
+interface ITeam {
     apiId: number;
     name: string;
     code: string;

@@ -1,6 +1,6 @@
-import mongoose, { Document, Model, Schema } from "mongoose";
+import mongoose, { Model, Schema } from "mongoose";
 
-interface IChat extends Document {
+export interface Chat {
     members: string[];
     messages: string[];
     isGroup?: boolean;
@@ -16,7 +16,7 @@ interface IChatMethods {
 
 type ChatModel = Model<IDBVersionChangeEvent, {}, IChatMethods>;
 
-const schema = new Schema<IChat, ChatModel, IChatMethods>({
+const schema = new Schema<Chat, ChatModel, IChatMethods>({
     members: [{ type: String }],
     messages: [{ type: String }],
     isGroup: { type: Boolean, default: false },
@@ -33,4 +33,4 @@ schema.method("addMember", function (member: string) {
     this.members.push(member);
 })
 
-export default (mongoose.models.Chat || mongoose.model<IChat, ChatModel>("Chat", schema)) as Model<IChat, {}, IChatMethods>;
+export default (mongoose.models.Chat || mongoose.model<Chat, ChatModel>("Chat", schema)) as Model<Chat, {}, IChatMethods>;

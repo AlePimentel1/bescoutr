@@ -44,13 +44,13 @@ export const mainMenuItems: MainMenuItems[] = [
         childrens: []
     },
     {
-        label: "Messages",
-        href: "/messages",
+        label: "Chat",
+        href: "/chat",
         icon: <MessageCircle size={24} />,
         isAccordion: false,
         open: [],
-        value: "messages",
-        slug: "/messages",
+        value: "chat",
+        slug: "/chat",
         childrens: []
     },
     {

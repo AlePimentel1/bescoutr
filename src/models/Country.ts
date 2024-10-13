@@ -1,6 +1,6 @@
 import mongoose, { Document, Model, Schema } from "mongoose";
 
-interface ICountry extends Document {
+interface ICountry {
     name: string;
     code: string;
     flag: string;

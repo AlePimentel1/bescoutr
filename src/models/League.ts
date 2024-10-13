@@ -1,6 +1,6 @@
-import mongoose, { Document, Model, Schema } from "mongoose";
+import mongoose, { Model, Schema } from "mongoose";
 
-interface ILeague extends Document {
+interface ILeague {
     apiId: number;
     name: string;
     type: string;

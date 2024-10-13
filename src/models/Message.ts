@@ -1,6 +1,6 @@
-import mongoose, { Document, Model, model, Schema } from "mongoose";
+import mongoose, { Model, model, Schema } from "mongoose";
 
-interface IMessage extends Document {
+export interface Message {
     status: "pending" | "sent" | "delivered" | "read";
     via: "api" | "web" | "app" | "server";
     chatId: string;
@@ -9,7 +9,7 @@ interface IMessage extends Document {
     message: string
 }
 
-const schema = new Schema<IMessage>({
+const schema = new Schema<Message>({
     status: { type: String, required: true, enum: ["pending", "sent", "delivered", "read"] },
     via: { type: String, required: true, enum: ["api", "web", "app", "server"] },
     chatId: { type: String, required: true },
@@ -18,4 +18,4 @@ const schema = new Schema<IMessage>({
     message: { type: String, required: true }
 }, { timestamps: true });
 
-export default (mongoose.models.Message || model<IMessage>("Message", schema)) as Model<IMessage>;
+export default (mongoose.models.Message || model<Message>("Message", schema)) as Model<Message>;
