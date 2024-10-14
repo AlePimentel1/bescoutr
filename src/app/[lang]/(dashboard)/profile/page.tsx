@@ -1,4 +1,3 @@
-import ProfileBasicInfo from "@/components/dashboard/profile/ProfileBasicInfo";
 import FlexibleLayout from "@/components/ui/customs/flexible-layout";
 
 export default function ProfilePage() {
@@ -6,7 +5,8 @@ export default function ProfilePage() {
         <FlexibleLayout
             childrenClassName="p-4"
         >
-            <ProfileBasicInfo />
+            <p>Profile page</p>
+            {/* <ProfileBasicInfo /> */}
         </FlexibleLayout>
     );
 }
