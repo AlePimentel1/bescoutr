@@ -6,13 +6,13 @@ interface RequestOptions {
     token?: string;
 }
 
-export const fetcher = async ({
+export const fetcher = async <T>({
     url,
     method = 'GET',
     body,
     requiresToken = false,
     token,
-}: RequestOptions) => {
+}: RequestOptions): Promise<T> => {
     try {
         // Preparar los headers
         const headers: HeadersInit = {

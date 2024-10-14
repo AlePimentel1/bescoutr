@@ -174,5 +174,28 @@
         "description": "Select the scouts you want to follow."
       }
     }
+  },
+
+  "Chat": {
+    "ChatList": {
+      "title": "Chats",
+      "search": "Search chats...",
+      "noChats": "No chats found",
+      "tab": {
+        "all": "All",
+        "personal": "Personal",
+        "groups": "Groups"
+    }
+  },
+  "ChatLayout": {
+    "noChatSelected": "Select a chat to start messaging",
+    "placeholder": "Type a message...",
+    "send": "Send",
+    "options": {
+      "info": "Info",
+      "mute": "Mute",
+      "delete": "Delete"
+    }
   }
+}
 }

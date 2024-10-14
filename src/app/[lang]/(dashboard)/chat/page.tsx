@@ -10,7 +10,9 @@ export default function MessagesPage() {
 
     return (
         <FlexibleLayout
-            childrenClassName="flex h-full">
+            childrenClassName="flex h-full"
+            withoutHeader
+        >
             <ChatsList />
             <ChatLayout />
         </FlexibleLayout>

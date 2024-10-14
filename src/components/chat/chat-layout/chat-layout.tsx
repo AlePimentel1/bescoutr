@@ -1,8 +1,11 @@
 import { useChatStore } from "@/store/chat"
+import { MessageCircleDashed, MessageSquareDashed, MessagesSquare } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { useEffect } from "react"
 
 const ChatLayout = () => {
     const { currentChat, exitChat } = useChatStore()
+    const dict = useTranslations("Chat.ChatLayout")
 
     useEffect(() => {
 
@@ -26,8 +29,9 @@ const ChatLayout = () => {
                         <p className="text-white">Messages</p>
                     </div>
                 ) : (
-                    <div className="flex items-center justify-center h-full">
-                        <p className="text-white">Select a chat</p>
+                    <div className="flex flex-col items-center justify-center h-full gap-4">
+                        <MessageCircleDashed className="text-secondary" size={140} />
+                        <p className="text-white">{dict("noChatSelected")}</p>
                     </div>
                 )}
             </div>

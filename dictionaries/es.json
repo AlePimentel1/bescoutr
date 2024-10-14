@@ -175,5 +175,27 @@
         "description": "Selecciona los scouts que deseas seguir."
     }
   } 
+  },
+  "Chat": {
+    "ChatList": {
+      "title": "Chats",
+      "search": "Buscar chats...",
+      "noChats": "No se encontraron chats",
+      "tab": {
+        "all": "Todos",
+        "personal": "Personal",
+        "groups": "Grupos"
+    }
+  },
+  "ChatLayout": {
+    "noChatSelected": "Selecciona un chat para comenzar a enviar mensajes",
+    "placeholder": "Escribe un mensaje...",
+    "send": "Enviar",
+    "options": {
+      "info": "Info",
+      "mute": "Silenciar",
+      "delete": "Eliminar"
+    }
   }
+}
 }
