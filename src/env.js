@@ -29,6 +29,8 @@ export const env = createEnv({
     UPSTASH_REDIS_REST_TOKEN: z.string(),
     SPORTS_API_KEY: z.string(),
     SPORTS_MONKS_API_KEY: z.string(),
+    PUSHER_APP_ID: z.string(),
+    PUSHER_APP_SECRET: z.string(),
   },
 
   /**
@@ -38,6 +40,7 @@ export const env = createEnv({
    */
   client: {
     // NEXT_PUBLIC_CLIENTVAR: z.string(),
+    NEXT_PUBLIC_PUSHER_APP_KEY: z.string(),
   },
 
   /**
@@ -56,7 +59,9 @@ export const env = createEnv({
     UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN,
     SPORTS_API_KEY: process.env.SPORTS_API_KEY,
     SPORTS_MONKS_API_KEY: process.env.SPORTS_MONKS_API_KEY,
-    // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
+    PUSHER_APP_ID: process.env.PUSHER_APP_ID,
+    PUSHER_APP_SECRET: process.env.PUSHER_APP_SECRET,
+    NEXT_PUBLIC_PUSHER_APP_KEY: process.env.NEXT_PUBLIC_PUSHER_APP_KEY
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
