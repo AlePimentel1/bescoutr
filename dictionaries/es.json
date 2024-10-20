@@ -185,17 +185,23 @@
         "all": "Todos",
         "personal": "Personal",
         "groups": "Grupos"
+      }
+    },
+    "ChatLayout": {
+      "noChatSelected": "Selecciona un chat para comenzar a enviar mensajes",
+      "placeholder": "Escribe un mensaje...",
+      "send": "Enviar",
+      "options": {
+        "info": "Info",
+        "mute": "Silenciar",
+        "delete": "Eliminar"
+      }
     }
   },
-  "ChatLayout": {
-    "noChatSelected": "Selecciona un chat para comenzar a enviar mensajes",
-    "placeholder": "Escribe un mensaje...",
-    "send": "Enviar",
-    "options": {
-      "info": "Info",
-      "mute": "Silenciar",
-      "delete": "Eliminar"
+  "Profile": {
+    "InfoCard": {
+        "followers": "Seguidores",
+        "following": "Siguiendo"
     }
   }
-}
 }

@@ -197,5 +197,11 @@
       "delete": "Delete"
     }
   }
+},
+"Profile": {
+  "InfoCard": {
+      "followers": "Followers",
+      "following": "Following"
+  }
 }
 }
