@@ -1,35 +1,57 @@
-import { env } from "@/env";
+import { safeApiMiddleware } from '@/app/api/middlewares/safeApi';
 import dbConnect from "@/lib/mongoDb";
-import Interaction, { ChatMessage } from "@/models/Interaction";
-import User from "@/models/User";
-import VerificationToken from "@/models/VerificationToken";
-import { hash } from "bcrypt";
-import { randomUUID } from "crypto";
-import { getToken } from "next-auth/jwt";
-import { NextRequest, NextResponse } from "next/server";
+import { pusherSever } from '@/lib/pusher';
+import Chat from '@/models/Chat';
+import Message from '@/models/Message';
+import { NextResponse } from "next/server";
 import { z } from "zod";
 
-const chatMessageSchema = z.object({
-    message: z.string().min(1).max(1000),
+const messageValidator = z.object({
+    chatId: z.string(),
+    text: z.string(),
 });
 
-export async function POST(req: NextRequest) {
+export async function POST(req: SafeNextRequest) {
     await dbConnect();
+    const safeAuth = await safeApiMiddleware(req);
+    if (safeAuth.status !== 200) return safeAuth;
     try {
 
-        const token = await getToken({ req, secret: env.NEXTAUTH_SECRET });
-        console.log("JSON Web Token", token)
-
         const body = await req.json()
-
-        const zBody = chatMessageSchema.safeParse(body);
+        const zBody = messageValidator.safeParse(req.body);
         if (!zBody.success) return NextResponse.json({ message: zBody.error, success: false }, { status: 400 })
 
-        const { message } = zBody.data;
+        const { text, chatId } = zBody.data;
 
-        console.log('User data:', zBody.data);
+        const existingChat = await Chat.findById(chatId);
+        if (!existingChat) return NextResponse.json({ message: "CHAT_NOT_FOUND", success: false }, { status: 404 });
 
-        return NextResponse.json({ message: "OK", success: true }, { status: 200 });
+        let receiversIds = [];
+        if (existingChat.isGroup) {
+            receiversIds = existingChat.members.filter(member => member.toString() !== req.user.id.toString());
+        } else {
+            const receiver = existingChat.members.find(member => member.toString() !== req.user.id.toString());
+            if (!receiver) return NextResponse.json({ message: "NOT_A_MEMBER", success: false }, { status: 403 });
+            receiversIds.push(receiver);
+        }
+
+        const sanitizedText = text.trim();
+        if (!sanitizedText) return NextResponse.json({ message: "EMPTY_MESSAGE", success: false }, { status: 400 });
+
+        const message = new Message({
+            chatId,
+            senderId: req.user.id,
+            receiversIds,
+            text: sanitizedText,
+            status: "sent",
+        })
+
+        await message.save();
+        await Chat.findByIdAndUpdate(chatId, { lastMessage: message._id });
+
+        pusherSever.trigger(`chat-${chatId}`, 'incoming-message', message);
+
+        return NextResponse.json({ success: true, message: "Message sent" }, { status: 200 });
 
     } catch (error) {
         return NextResponse.json({ message: "SERVER_ERROR", success: false }, { status: 500 });

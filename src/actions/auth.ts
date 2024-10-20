@@ -1,5 +1,3 @@
-import { signUpData } from "types/api";
-
 export const registerUser = async (data: signUpData) => {
     const response = await fetch('/api/auth/register', {
         method: 'POST',

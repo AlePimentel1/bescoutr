@@ -1,5 +1,5 @@
 'use client'
-import CompleteProfileSteps from "@/components/complete-profile/steps";
+import CompleteProfileSteps from "@/components/complete-profile/Steps";
 import { Loader2 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";

@@ -13,7 +13,7 @@ import { useQuery } from "@tanstack/react-query";
 // import { playerOfTheDay } from "@/helpers/fakeData";
 import { Circle } from "lucide-react";
 import { useTranslations } from "next-intl"
-import { PlayerOfTheDaySkeleton } from "./player-of-th-day-skeleton";
+import { PlayerOfTheDaySkeleton } from "./PlayerOfTheDaySkeleton";
 
 export default function PlayerOfTheDayCard() {
     const dict = useTranslations('HomePage.PlayerOfTheDay');

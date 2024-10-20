@@ -1,7 +1,6 @@
 import { safeApiMiddleware } from "@/app/api/middlewares/safeApi";
 import { env } from "@/env";
 import { NextRequest, NextResponse } from "next/server";
-import { SafeNextRequest } from "types/api";
 
 export async function GET(req: SafeNextRequest) {
     try {

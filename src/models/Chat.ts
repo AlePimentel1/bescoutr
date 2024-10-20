@@ -1,36 +1,33 @@
 import mongoose, { Model, Schema } from "mongoose";
 
 export interface Chat {
-    members: string[];
-    messages: string[];
+    members: mongoose.Types.ObjectId[];
     isGroup?: boolean;
-    name?: string;
+    groupName?: string;
     groupPhoto?: string;
-    lastMessage?: Date;
+    lastMessage?: mongoose.Types.ObjectId;
 }
 
 interface IChatMethods {
-    addMessage: (message: string) => void;
     addMember: (member: string) => void;
 }
 
 type ChatModel = Model<IDBVersionChangeEvent, {}, IChatMethods>;
 
 const schema = new Schema<Chat, ChatModel, IChatMethods>({
-    members: [{ type: String }],
-    messages: [{ type: String }],
+    members: [{ type: Schema.Types.ObjectId, ref: "User" }],
     isGroup: { type: Boolean, default: false },
-    name: { type: String },
+    groupName: { type: String },
     groupPhoto: { type: String },
-    lastMessage: { type: Date },
+    lastMessage: { type: Schema.Types.ObjectId, ref: "Message" },
 }, { timestamps: true });
 
-schema.method("addMessage", function (message: string) {
-    this.messages.push(message);
+schema.method("addMember", function (memberId: mongoose.Types.ObjectId) {
+    if (!this.members.includes(memberId)) {
+        this.members.push(memberId);
+    } else {
+        throw new Error("User already in chat");
+    }
 });
-
-schema.method("addMember", function (member: string) {
-    this.members.push(member);
-})
 
 export default (mongoose.models.Chat || mongoose.model<Chat, ChatModel>("Chat", schema)) as Model<Chat, {}, IChatMethods>;

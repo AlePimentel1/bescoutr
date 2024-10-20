@@ -1,6 +1,6 @@
 'use client'
-import AccountCreated from "@/components/auth/signin/account-created";
-import SignUpForm from "@/components/auth/signup/sign-up-form";
+import AccountCreated from "@/components/auth/signin/AccountCreated";
+import SignUpForm from "@/components/auth/signup/SignUpForm";
 import { useState } from "react";
 
 

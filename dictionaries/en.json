@@ -181,6 +181,7 @@
       "title": "Chats",
       "search": "Search chats...",
       "noChats": "No chats found",
+      "addChat": "Start a new chat",
       "tab": {
         "all": "All",
         "personal": "Personal",

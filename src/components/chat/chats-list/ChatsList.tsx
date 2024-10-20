@@ -1,12 +1,15 @@
-import { useChatStore } from "@/store/chat";
-import ChatListItem from "./chat-list-item";
-import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
+'use client'
 import CustomTabs from "@/components/ui/customs/custom-tabs";
-import { useTranslations } from "next-intl";
-import AllChats from "./chat-types/all-chats";
 import { Input } from "@/components/ui/input";
-import { PlusSquare, Search } from "lucide-react";
+import { useChatStore } from "@/store/chat";
+import { useQuery } from "@tanstack/react-query";
+import { useTranslations } from "next-intl";
+import { useEffect } from "react";
+import AllChats from "./chat-types/all-chats";
+import { Button } from "@/components/ui/button";
+import { Plus } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { SimpleToolTip } from "@/components/ui/customs/simple-tooltip";
 
 const ChatsList = () => {
     const { chats, setChats, currentChat } = useChatStore();
@@ -49,11 +52,18 @@ const ChatsList = () => {
                     },
                 ]}
                 childrenBeforeContent={
-                    <div className="px-2 flex gap-2">
+                    <div className="px-2 flex flex-row gap-2">
                         <Input
                             placeholder={dict("search")}
                             className="w-full border-0"
                         />
+                        <TooltipProvider>
+                            <SimpleToolTip content={dict("addChat")}>
+                                <Button variant={'outline'}>
+                                    <Plus size={16} />
+                                </Button>
+                            </SimpleToolTip>
+                        </TooltipProvider>
                     </div>
                 }
             />

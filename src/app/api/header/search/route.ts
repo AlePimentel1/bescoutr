@@ -5,7 +5,6 @@ import Player from "@/models/Player";
 import Team from "@/models/Team";
 import User from "@/models/User";
 import { NextResponse } from "next/server";
-import { SafeNextRequest } from "types/api";
 
 export async function GET(req: SafeNextRequest) {
     try {

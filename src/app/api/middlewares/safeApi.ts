@@ -2,7 +2,6 @@ import { env } from "@/env";
 import dbConnect from "@/lib/mongoDb";
 import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
-import { SafeNextRequest } from "types/api";
 
 export async function safeApiMiddleware(req: SafeNextRequest) {
     try {

@@ -1,6 +1,7 @@
 import { Chat } from "@/models/Chat";
-import ChatListItem from "../chat-list-item";
-import ChatListLoader from "../chat-list-loader";
+import ChatListLoader from "../ChatListLoader";
+import ChatListItem from "../ChatListItem";
+import EmptyList from "../EmptyList";
 
 interface Props {
     currentChat: string | null;
@@ -17,7 +18,7 @@ const AllChats = ({ currentChat, chats, isLoading }: Props) => {
                     <ChatListItem key={chat._id} currentChat={currentChat} chat={chat} />
                 ))
             ) : (
-                <p>No chats</p>
+                <EmptyList />
             )}
         </div>
     )

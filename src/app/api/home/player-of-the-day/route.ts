@@ -1,10 +1,7 @@
-import { env } from "@/env";
-import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
 import { safeApiMiddleware } from "@/app/api/middlewares/safeApi";
-import League from "@/models/League";
+import { env } from "@/env";
 import Country from "@/models/Country";
-import { SafeNextRequest } from "types/api";
+import { NextResponse } from "next/server";
 
 export async function GET(req: SafeNextRequest) {
     try {

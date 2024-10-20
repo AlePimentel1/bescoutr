@@ -6,7 +6,7 @@ import { completeProfileDefaultValues, completeProfileSchema } from "./utils/con
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Form } from "../ui/form"
-import BasicInfo from "./basic-info/basic-info-step"
+import BasicInfo from "./basic-info/BasicInfoStep"
 import Favourites from "./favourites/favourites-step"
 import { AnimatePresence, motion } from 'framer-motion';
 
