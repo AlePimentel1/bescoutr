@@ -27,13 +27,9 @@ export default function PlayerOfTheDayCard() {
 
     return (
         <>
-            {isLoading ? (
+            {(isLoading || error) ? (
                 <div>
                     <PlayerOfTheDaySkeleton />
-                </div>
-            ) : error ? (
-                <div>
-                    <p>{error.message}</p>
                 </div>
             ) : (
                 <Card className="relative flex flex-col w-full border-none bg-night-sky-900/80 h-[300px] bg-[url('/textures/hexagons.svg')] bg-center bg-contain">
