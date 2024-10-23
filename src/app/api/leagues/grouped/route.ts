@@ -1,11 +1,9 @@
-import { env } from "@/env";
-import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
 import { safeApiMiddleware } from "@/app/api/middlewares/safeApi";
-import League from "@/models/League";
 import Country from "@/models/Country";
+import { NextResponse } from "next/server";
+import { SafeNextRequest } from "types/api";
 
-export async function GET(req: NextRequest) {
+export async function GET(req: SafeNextRequest) {
     try {
         const safeAuth = await safeApiMiddleware(req);
         if (safeAuth.status !== 200) return safeAuth;

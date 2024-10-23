@@ -1,8 +1,8 @@
 import { NextRequest } from "next/server";
-import { User } from "./next.auth";
+import { IUser } from "@/models/User";
 
 export interface SafeNextRequest extends NextRequest {
-    user: User
+    user: IUser
 }
 
 export interface signUpData {

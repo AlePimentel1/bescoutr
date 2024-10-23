@@ -15,8 +15,8 @@ export interface IUser {
     favouriteTeams: string[];
     favouriteLeagues: string[];
     profilePicture?: string;
-    firstName?: string;
-    lastName?: string;
+    firstName: string;
+    lastName: string;
     isComplete: boolean;
 }
 

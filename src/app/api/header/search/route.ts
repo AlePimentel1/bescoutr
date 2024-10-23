@@ -43,7 +43,7 @@ export async function GET(req: SafeNextRequest) {
                         { lastName: { $regex: searchValue, $options: "i" } },
                         { username: { $regex: searchValue, $options: "i" } }
                     ],
-                    _id: { $ne: req.user.id }
+                    _id: { $ne: req.user._id }
                 }).limit(limit).skip(offset).select('firstName lastName username profilePicture');
                 const formattedResults = users.map(user => {
                     return {

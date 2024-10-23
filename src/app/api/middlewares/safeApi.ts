@@ -1,5 +1,6 @@
 import { env } from "@/env";
 import dbConnect from "@/lib/mongoDb";
+import User from "@/models/User";
 import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 import { SafeNextRequest } from "types/api";
@@ -21,7 +22,17 @@ export async function safeApiMiddleware(req: SafeNextRequest) {
             { status: 401 }
         );
     }
-    req.user = token;
+
+    const user = await User.findById(token.id).lean();
+
+    if (!user) {
+        return NextResponse.json(
+            { message: "USER_NOT_FOUND", success: false },
+            { status: 404 }
+        );
+    }
+
+    req.user = user;
 
     return NextResponse.next();
 }

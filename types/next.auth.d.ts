@@ -5,7 +5,8 @@ declare module "next-auth" {
         id: string;
         username: string;
         email: string;
-        name: string;
+        firstName: string;
+        lastName: string;
         image: string;
         isComplete: boolean;
     }
@@ -16,7 +17,8 @@ declare module "next-auth" {
             username: string;
             email: string;
             image: string;
-            name: string;
+            firstName: string;
+            lastName: string;
             isComplete: boolean;
         } & DefaultSession["user"];
     }
@@ -27,7 +29,6 @@ declare module "next-auth/jwt" {
         id: string;
         username: string;
         email: string;
-        name: string;
         image: string;
         isComplete: boolean;
     }

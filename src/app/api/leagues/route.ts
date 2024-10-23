@@ -2,8 +2,9 @@ import { env } from "@/env";
 import rateLimiter from "@/lib/rateLimiter";
 import { NextRequest, NextResponse } from "next/server";
 import { safeApiMiddleware } from "../middlewares/safeApi";
+import { SafeNextRequest } from "types/api";
 
-export async function GET(req: NextRequest) {
+export async function GET(req: SafeNextRequest) {
     const rateLimit = await rateLimiter(req);
     if (!rateLimit) {
         return NextResponse.json({ message: "RATE_LIMIT_EXCEEDED", success: false }, { status: 429 });

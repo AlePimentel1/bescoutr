@@ -1,19 +1,13 @@
-import {
-  getServerSession,
-  type DefaultSession,
-  type NextAuthOptions,
-  type User as NextAuthUser,
-} from "next-auth";
-import DiscordProvider from "next-auth/providers/discord";
-import Credentials from "next-auth/providers/credentials";
-import Google from "next-auth/providers/google";
 import { env } from "@/env";
+import dbConnect from "@/lib/mongoDb";
 import User from "@/models/User";
 import { compare } from "bcrypt";
-import dbConnect from "@/lib/mongoDb";
-import { AdapterUser } from "next-auth/adapters";
-import { JWT } from "next-auth/jwt";
-import { DefaultJWT } from "next-auth/jwt";
+import {
+  getServerSession,
+  type NextAuthOptions
+} from "next-auth";
+import Credentials from "next-auth/providers/credentials";
+import Google from "next-auth/providers/google";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -42,6 +36,8 @@ export const authOptions: NextAuthOptions = {
           id: user.id,
           email: user.email,
           username: user.username,
+          firstName: user.firstName,
+          lastName: user.lastName,
           isComplete: user.isComplete,
         };
       }
@@ -57,7 +53,8 @@ export const authOptions: NextAuthOptions = {
           id: token.id,
           username: token.username,
           email: token.email,
-          name: token.name,
+          firstName: token.firstName,
+          lastName: token.lastName,
           profilePicture: token.image,
           isComplete: token.isComplete,
         },
@@ -95,7 +92,8 @@ export const authOptions: NextAuthOptions = {
             id: existingUser._id.toString(),
             username: existingUser.username,
             email: existingUser.email,
-            name: existingUser.firstName + ' ' + existingUser.lastName,
+            firstName: existingUser.firstName,
+            lastName: existingUser.lastName,
             image: existingUser.profilePicture || '',
             isComplete: existingUser.isComplete,
           };
