@@ -11,15 +11,18 @@ const ProfileBasicInfo = () => {
     const dict = useTranslations("Profile");
     return (
         <div className="flex flex-col md:flex-row w-full h-full gap-6">
-            <div className="bg-white/5 rounded-lg pt-4 px-6 flex flex-col gap-4">
-                <div className="flex flex-row gap-2 items-center">
-                    <Avatar className='border h-20 w-20'>
+            <div className="bg-white/5 rounded-lg pt-4 px-6 flex flex-col gap-6">
+                <div className="flex flex-row gap-4 items-center">
+                    <Avatar className='border h-24 w-24'>
                         <AvatarImage src={user?.image ?? ''} />
                         <AvatarFallback className='bg-secondary text-white'>{user?.username?.[0]?.toUpperCase()}</AvatarFallback>
                     </Avatar>
-                    <span className="flex flex-col">
-                        <p className="text-white text-2xl line-clamp-1">{user?.name.split(" ")[0]}</p>
-                        <Badge className="bg-white/10 text-neutral-200 p-1 px-2 w-fit items-center justify-center font-normal text-[10px] hover:bg-white/10">@{user.username}</Badge>
+                    <span className="flex flex-col gap-1">
+                        <span className="flex flex-col">
+                            <p className="text-white text-lg line-clamp-1 font-light">{user?.firstName}</p>
+                            <p className="text-white text-2xl line-clamp-1">{user?.lastName}</p>
+                        </span>
+                        <Badge className="bg-white/10 text-neutral-200 p-1 px-2 w-fit items-center justify-center font-normal text-[10px] hover:bg-white/10">@{user?.username}</Badge>
                     </span>
                 </div>
                 <div className="flex flex-row gap-2">

@@ -19,7 +19,8 @@
     "SearchBar": {
       "placeholder": "Buscar",
       "filterButton": "Añadir filtro",
-      "recentSearches": "Búsquedas recientes"
+      "recentSearches": "Búsquedas recientes",
+      "noResults": "No se encontraron resultados"
     },
    "DropDown": {
         "AccountSettings": {

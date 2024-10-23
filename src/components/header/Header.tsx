@@ -30,7 +30,7 @@ export default function Header({ searchRightElement }: HeaderProps) {
                         <AvatarFallback className='bg-secondary text-white'>{user?.username?.[0]?.toUpperCase()}</AvatarFallback>
                     </Avatar>
                     <span className='flex flex-col'>
-                        <p className='text-white'>{user?.firstName} {user.lastName}</p>
+                        <p className='text-white'>{user?.firstName} {user?.lastName}</p>
                         <SettingsDropdown />
                     </span>
                 </div>
