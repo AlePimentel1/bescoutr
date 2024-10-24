@@ -43,10 +43,10 @@ const SideNav = () => {
                 />
 
                 {/* SIDEBAR */}
-                <div className={`flex w-max lg:left-0 ${isOpen ? "left-0" : "-left-full"} duration-300 ease-in-out bg-white bg-opacity-5 h-[100vh]`}>
+                <div className={`flex w-max lg:left-0 ${isOpen ? "left-0" : "-left-full"} duration-200 ease-in-out bg-white bg-opacity-5 h-[100vh]`}>
                     <div className={`w-full`}>
                         <aside className={`flex flex-col lg:left-0 h-[100vh] overflow-y-auto`}>
-                            <div className={`w-[260px] ${isCollapsed ? "lg:w-[68px] flex flex-col items-center" : "lg:w-[260px] px-4"} h-full shrink-0 relative duration-300 bg-transparent ease-out items-center`}>
+                            <div className={`w-[260px] ${isCollapsed ? "lg:w-[68px] flex flex-col items-center" : "lg:w-[260px] px-4"} h-full shrink-0 relative duration-200 bg-transparent ease-out items-center`}>
 
                                 {/* LOGO */}
                                 <div className="flex flex-col shrink-0 w-full">
@@ -55,12 +55,12 @@ const SideNav = () => {
                                             <img
                                                 src="/isotipo.webp"
                                                 alt="BeScoutr logo minimized"
-                                                className={`w-8 h-auto transition-transform duration-300 ${isCollapsed ? "lg:flex hidden" : "scale-0 hidden"}`}
+                                                className={`w-8 h-auto transition-transform duration-200 ${isCollapsed ? "lg:flex hidden" : "scale-0 hidden"}`}
                                             />
                                             <img
                                                 src="/imagotipo.webp"
                                                 alt="BeScoutr logo"
-                                                className={`w-[160px] transition-transform duration-300 ${isCollapsed ? "lg:scale-0 lg:hidden" : ""} flex`}
+                                                className={`w-[160px] transition-transform duration-200 ${isCollapsed ? "lg:scale-0 lg:hidden" : ""} flex`}
                                             />
                                         </div>
                                     </Link>
